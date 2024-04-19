@@ -1,10 +1,11 @@
 import React from "react";
 import { TabsComponent } from "./[id]/tabs-component";
+import { emptyInvoice } from "@/data";
 
 const NewInvoice = () => {
   return (
     <div>
-      <TabsComponent />
+      <TabsComponent invoice={emptyInvoice} />
     </div>
   );
 };

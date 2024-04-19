@@ -6,6 +6,8 @@ import { AudioWaveform } from "lucide-react";
 
 // Create Document Component
 const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
+  if (!invoice) return null;
+
   return (
     <>
       <Document>

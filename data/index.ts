@@ -116,3 +116,19 @@ export const invoices: InvoiceT[] = [
     createdAt: "2021-11-12",
   },
 ];
+
+export const emptyInvoice: InvoiceT = {
+  id: "1",
+  // @ts-ignore
+  client: {},
+  products: [],
+  terms: "",
+  customerNotes: "",
+  minipaywallet: "256700713436",
+  thankYouNotes: "Thank you for your business",
+  amount: 0.0, // Adjusted to sum products: (1000 * 1) + (2000 * 2)
+  invoiceNumber: "INV-123",
+  category: InvoiceEnum.Unpaid,
+  dueDate: "2021-12-12",
+  createdAt: "2021-11-12",
+};

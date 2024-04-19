@@ -34,13 +34,13 @@ export function CreateNewInvoiceTabs() {
 
       {/* Edit */}
       <TabsContent value="edit" className="p-4">
-        <EditInvoice />
+        {/* <EditInvoice /> */}
       </TabsContent>
 
       {/* Preview */}
       <TabsContent value="preview" className="p-4">
         <div className="h-screen relative">
-          <PreviewInvoicepdf />
+          {/* <PreviewInvoicepdf /> */}
           <div className="flex w-full flex-row fixed h-16 bottom-0 justify-end right-0 z-20 left-0 px-4">
             <Button
               className="rounded-full bg-green-600 size-12 text-white mr-4 "
