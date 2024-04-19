@@ -43,7 +43,7 @@ export default function Home() {
           <Plus size={18} />
         </Button>
       </Link>
-      <BottomTabs />
+      <BottomTabs active="home" />
     </div>
   );
 }
