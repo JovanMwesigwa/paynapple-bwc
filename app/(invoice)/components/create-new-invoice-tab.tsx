@@ -4,12 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft, Share2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import EditInvoice from "../../components/EditInvoice";
-import PreviewInvoicepdf from "../../components/PreviewInvoicepdf";
-import DownloadInvoice from "../../components/DownloadInvoice";
-import { InvoiceT } from "@/types";
+import EditInvoice from "./EditInvoice";
+import PreviewInvoicepdf from "./PreviewInvoicepdf";
+import DownloadInvoice from "./DownloadInvoice";
 
-export function TabsComponent({ invoice }: { invoice: InvoiceT }) {
+export function CreateNewInvoiceTabs() {
   const router = useRouter();
 
   return (
@@ -35,13 +34,13 @@ export function TabsComponent({ invoice }: { invoice: InvoiceT }) {
 
       {/* Edit */}
       <TabsContent value="edit" className="p-4">
-        <EditInvoice invoice={invoice} />
+        <EditInvoice />
       </TabsContent>
 
       {/* Preview */}
       <TabsContent value="preview" className="p-4">
         <div className="h-screen relative">
-          <PreviewInvoicepdf invoice={invoice} />
+          <PreviewInvoicepdf />
           <div className="flex w-full flex-row fixed h-16 bottom-0 justify-end right-0 z-20 left-0 px-4">
             <Button
               className="rounded-full bg-green-600 size-12 text-white mr-4 "

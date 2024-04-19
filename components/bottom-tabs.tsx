@@ -1,14 +1,4 @@
-import { Button } from "@/components/ui/button";
-import {
-  Calculator,
-  Link,
-  PackageOpen,
-  PlusIcon,
-  Receipt,
-  Settings,
-  User,
-} from "lucide-react";
-import React from "react";
+import { Link, PackageOpen, Receipt, User } from "lucide-react";
 
 const BottomTabs = () => {
   return (
@@ -18,12 +8,12 @@ const BottomTabs = () => {
         <p className="text-[10px]">Invoices</p>
       </div>
       <div className="flex-1 flex  items-center justify-center flex-col  text-neutral-400 w-full">
-        <Link className="" size={20} />
-        <p className="text-[10px]">Invoices</p>
-      </div>
-      <div className="flex-1 flex  items-center justify-center flex-col  text-neutral-400 w-full">
         <PackageOpen className="" size={20} />
         <p className="text-[10px]">Items</p>
+      </div>
+      <div className="flex-1 flex  items-center justify-center flex-col  text-neutral-400 w-full">
+        <Link className="" size={20} />
+        <p className="text-[10px]">Pay links</p>
       </div>
       <div className="flex-1 flex  items-center justify-center flex-col  text-neutral-400 w-full">
         <User className="" size={20} />

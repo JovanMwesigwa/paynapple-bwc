@@ -1,5 +1,7 @@
+import ProductCard from "@/app/components/ProductCard";
 import FloatingButton from "@/components/FloatingButton";
 import { Separator } from "@/components/ui/separator";
+import { InvoiceT } from "@/types";
 import {
   AudioWaveform,
   CreditCard,
@@ -12,7 +14,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
-const EditInvoice = () => {
+const EditInvoice = ({ invoice }: { invoice: InvoiceT }) => {
   return (
     <div className="flex flex-1 flex-col gap-y-4">
       {/* Header */}
@@ -41,17 +43,17 @@ const EditInvoice = () => {
           </div>
 
           <div className="w-full flex flex-row text-sm items-center justify-between">
-            <h1>Mr. James Lineker</h1>
-            <h1>#INV0002</h1>
+            <h1>{invoice.client.name}</h1>
+            <h1>#{invoice.invoiceNumber}</h1>
           </div>
 
           <div className="w-full flex flex-row text-xs items-center justify-between">
-            <h1>james.lineker@gmail.com</h1>
+            <h1>{invoice.client.email}</h1>
             <h1>Date: 04/18/2024</h1>
           </div>
 
           <div className="w-full flex flex-row text-xs items-center justify-between">
-            <h1>25670071717171</h1>
+            <h1>{invoice.client.phone}</h1>
             <h1>Due date: 04/25/2024</h1>
           </div>
         </div>
@@ -61,35 +63,9 @@ const EditInvoice = () => {
 
       {/* Items */}
       <div className="flex flex-col w-full gap-y-4">
-        <div className="flex flex-row w-full justify-between">
-          <div className="flex flex-col">
-            <h1 className="font-medium text-md">UI/UX Design</h1>
-            <p className="text-sm font-light text-neutral-600">$100 x 5hrs</p>
-          </div>
-          <div className="">
-            <h1 className="font-medium text-md">$500.00</h1>
-          </div>
-        </div>
-
-        <div className="flex flex-row w-full justify-between">
-          <div className="flex flex-col">
-            <h1 className="font-medium text-md">Front-end</h1>
-            <p className="text-sm font-light text-neutral-600">$100 x 5hrs</p>
-          </div>
-          <div className="">
-            <h1 className="font-medium text-md">$800.00</h1>
-          </div>
-        </div>
-
-        <div className="flex flex-row w-full justify-between">
-          <div className="flex flex-col">
-            <h1 className="font-medium text-md">Back-end</h1>
-            <p className="text-sm font-light text-neutral-600">$100 x 5hrs</p>
-          </div>
-          <div className="">
-            <h1 className="font-medium text-md">$700.00</h1>
-          </div>
-        </div>
+        {invoice.products.map((product) => (
+          <ProductCard product={product} key={product.id} />
+        ))}
 
         <div className="flex flex-row items-center gap-x-2 my-4">
           <Plus size={20} className="text-green-500" />
@@ -103,7 +79,7 @@ const EditInvoice = () => {
         <div className="flex flex-col w-1/2 self-end gap-y-2">
           <div className="w-full flex flex-row items-center justify-between">
             <h1 className="font-semibold text-md">Sub total</h1>
-            <h1 className="font-semibold text-md">$2,000.00</h1>
+            <h1 className="font-semibold text-md">${invoice.amount}</h1>
           </div>
 
           <div className="w-full flex flex-row items-center justify-between">
@@ -123,7 +99,7 @@ const EditInvoice = () => {
 
           <div className="w-full flex flex-row items-center justify-between">
             <h1 className="text-md font-semibold">Total</h1>
-            <h1 className="text-md font-semibold">$2,000.00</h1>
+            <h1 className="text-md font-semibold">${invoice.amount}</h1>
           </div>
 
           <div className="w-full flex flex-row items-center justify-between">
@@ -204,6 +180,7 @@ const EditInvoice = () => {
               <ShieldCheck size={20} className="text-green-500" />
               <div className="flex flex-col">
                 <h1 className="text-sm ">Terms & conditions</h1>
+                <h1 className="text-xs font-light">{invoice.terms}</h1>
               </div>
             </div>
           </div>
@@ -213,9 +190,7 @@ const EditInvoice = () => {
               <PanelBottomOpen size={20} className="text-green-500" />
               <div className="flex flex-col">
                 <h1 className="text-sm ">Customer note</h1>
-                <h1 className="text-xs font-light">
-                  Most preffered mode of payment to be done with MiniPay
-                </h1>
+                <h1 className="text-xs font-light">{invoice.customerNotes}</h1>
               </div>
             </div>
           </div>
@@ -225,9 +200,7 @@ const EditInvoice = () => {
               <Heart size={20} className="text-green-500" />
               <div className="flex flex-col">
                 <h1 className="text-sm ">Thank you note</h1>
-                <h1 className="text-xs font-light">
-                  Thank you for your business. We appreciate it.
-                </h1>
+                <h1 className="text-xs font-light">{invoice.thankYouNotes}</h1>
               </div>
             </div>
           </div>

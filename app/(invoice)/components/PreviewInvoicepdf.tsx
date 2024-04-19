@@ -1,10 +1,11 @@
 "use client";
 
+import { InvoiceT } from "@/types";
 import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 import { AudioWaveform } from "lucide-react";
 
 // Create Document Component
-const PreviewInvoicepdf = () => {
+const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
   return (
     <>
       <Document>
@@ -34,12 +35,11 @@ const PreviewInvoicepdf = () => {
           {/* Bill to */}
           <View style={styles.titleContainer}>
             <View style={styles.brandContainer}>
-              <Text style={styles.textXsBold}>Bill to: Mr. James Lineaker</Text>
-              <Text style={styles.textXs}>Katabi, Zone B</Text>
-              <Text style={styles.textXs}>Heywateeth, Bournemouth</Text>
-              <Text style={styles.textXs}>
-                james.olie@gmail.com, 2457889890
+              <Text style={styles.textXsBold}>
+                Bill to: {invoice.client.name}
               </Text>
+              <Text style={styles.textXs}>{invoice.client.email}</Text>
+              <Text style={styles.textXs}>{invoice.client.phone}</Text>
             </View>
           </View>
 
@@ -63,68 +63,32 @@ const PreviewInvoicepdf = () => {
               </View>
             </View>
 
-            <View style={styles.tableItem}>
-              <View style={styles.tableItemContainerStart}>
-                <Text>1</Text>
+            {invoice.products.map((product, index) => (
+              <View style={styles.tableItem} key={product.id}>
+                <View style={styles.tableItemContainerStart}>
+                  <Text>{index + 1}</Text>
+                </View>
+                <View style={styles.tableItemContainer}>
+                  <Text>{product.name}</Text>
+                </View>
+                <View style={styles.tableItemContainer}>
+                  <Text>{product.quantity}</Text>
+                </View>
+                <View style={styles.tableItemContainer}>
+                  <Text>${product.price.toFixed(2)}</Text>
+                </View>
+                <View style={styles.tableItemContainerEnd}>
+                  <Text>${(product.price * product.quantity).toFixed(2)}</Text>
+                </View>
               </View>
-              <View style={styles.tableItemContainer}>
-                <Text>UI/UX Design</Text>
-              </View>
-              <View style={styles.tableItemContainer}>
-                <Text>5</Text>
-              </View>
-              <View style={styles.tableItemContainer}>
-                <Text>$100.00</Text>
-              </View>
-              <View style={styles.tableItemContainerEnd}>
-                <Text>$500</Text>
-              </View>
-            </View>
-
-            <View style={styles.tableItem}>
-              <View style={styles.tableItemContainerStart}>
-                <Text>2</Text>
-              </View>
-              <View style={styles.tableItemContainer}>
-                <Text>Front-end</Text>
-              </View>
-              <View style={styles.tableItemContainer}>
-                <Text>6</Text>
-              </View>
-              <View style={styles.tableItemContainer}>
-                <Text>$100.00</Text>
-              </View>
-              <View style={styles.tableItemContainerEnd}>
-                <Text>$800</Text>
-              </View>
-            </View>
-
-            <View style={styles.tableItem}>
-              <View style={styles.tableItemContainerStart}>
-                <Text>3</Text>
-              </View>
-              <View style={styles.tableItemContainer}>
-                <Text>Backend</Text>
-              </View>
-              <View style={styles.tableItemContainer}>
-                <Text>4</Text>
-              </View>
-              <View style={styles.tableItemContainer}>
-                <Text>$100.00</Text>
-              </View>
-              <View style={styles.tableItemContainerEnd}>
-                <Text>$700</Text>
-              </View>
-            </View>
+            ))}
           </View>
 
           {/* Payment info */}
           <View style={styles.paymentInfoContainer}>
             <View style={styles.titleContainer}>
               <View style={styles.brandContainer}>
-                <Text style={styles.textItalic}>
-                  Thank you for your business
-                </Text>
+                <Text style={styles.textItalic}>{invoice.thankYouNotes}</Text>
                 <Text style={{ ...styles.textXsBold, marginTop: 10 }}>
                   Payment Info:
                 </Text>
@@ -149,7 +113,7 @@ const PreviewInvoicepdf = () => {
                     >
                       MiniPay:{" "}
                     </Text>
-                    <Text style={styles.textXs}>256789898989</Text>
+                    <Text style={styles.textXs}>{invoice.minipaywallet}</Text>
                   </View>
                 </View>
                 <View style={styles.payContainer}>
@@ -195,7 +159,7 @@ const PreviewInvoicepdf = () => {
                   }}
                 >
                   <Text style={styles.textXsBold}>SubTotal</Text>
-                  <Text style={styles.textXsBold}>$2,000.00</Text>
+                  <Text style={styles.textXsBold}>${invoice.amount}</Text>
                 </View>
 
                 <View
@@ -209,7 +173,7 @@ const PreviewInvoicepdf = () => {
                   }}
                 >
                   <Text style={styles.textXsBold}>Total</Text>
-                  <Text style={styles.textXsBold}>$2,000.00</Text>
+                  <Text style={styles.textXsBold}>${invoice.amount}</Text>
                 </View>
 
                 <View
@@ -223,7 +187,7 @@ const PreviewInvoicepdf = () => {
                   }}
                 >
                   <Text style={styles.textXsBold}>Balance Due</Text>
-                  <Text style={styles.textXsBold}>$2,000.00</Text>
+                  <Text style={styles.textXsBold}>${invoice.amount}</Text>
                 </View>
 
                 <View
@@ -267,12 +231,20 @@ const PreviewInvoicepdf = () => {
             style={{
               display: "flex",
               flexDirection: "column",
+              marginBottom: 6,
             }}
           >
             <Text style={styles.textXsBold}>Customer note</Text>
-            <Text style={styles.textXs}>
-              Most preffered mode of payment to be done with MiniPay
-            </Text>
+            <Text style={styles.textXs}>{invoice.customerNotes}</Text>
+          </View>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <Text style={styles.textXsBold}>Invoice Terms</Text>
+            <Text style={styles.textXs}>{invoice.terms}</Text>
           </View>
         </Page>
       </Document>
@@ -330,7 +302,7 @@ const styles = StyleSheet.create({
   textXsBold: {
     fontSize: 11,
     color: "#403f3e",
-    fontWeight: "extrabold",
+    fontWeight: "bold",
     marginBottom: 4,
   },
   itemsContainer: {

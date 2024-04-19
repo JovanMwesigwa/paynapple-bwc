@@ -27,7 +27,7 @@ const InvoiceCard = ({ invoice }: { invoice: InvoiceT }) => {
       <div className="flex justify-between my-5 items-center p-4 bg-white rounded-lg shadow-md ">
         <div className="flex flex-1 flex-col gap-y-1">
           <div className="">
-            <h1>{invoice.client}</h1>
+            <h1>{invoice.client.name}</h1>
           </div>
           <div className="text-xs text-neutral-400">
             <p>#{invoice.invoiceNumber}</p>

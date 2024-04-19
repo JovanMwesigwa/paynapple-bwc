@@ -1,7 +1,12 @@
 import React from "react";
+import { TabsComponent } from "./[id]/tabs-component";
 
 const NewInvoice = () => {
-  return <div>NewInvoice</div>;
+  return (
+    <div>
+      <TabsComponent />
+    </div>
+  );
 };
 
 export default NewInvoice;
