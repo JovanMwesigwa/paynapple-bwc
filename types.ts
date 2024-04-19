@@ -1,9 +1,11 @@
 export enum InvoiceEnum {
-  "Unpaid",
-  "Partially",
-  "Paid",
-  "Rejected",
+  "Unpaid" = "Unpaid",
+  "Partially" = "Partially",
+  "Paid" = "Paid",
+  "Rejected" = "Rejected",
 }
+
+export enum InvoiceType {}
 
 export type InvoiceT = {
   id: string;

@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import EditInvoice from "../../components/EditInvoice";
 
 export function TabsComponent() {
   const router = useRouter();
@@ -32,14 +33,7 @@ export function TabsComponent() {
 
       {/* Edit */}
       <TabsContent value="edit" className="p-4">
-        <div className="space-y-1">
-          <Label htmlFor="name">Name</Label>
-          <Input id="name" defaultValue="Pedro Duarte" />
-        </div>
-        <div className="space-y-1">
-          <Label htmlFor="username">Username</Label>
-          <Input id="username" defaultValue="@peduarte" />
-        </div>
+        <EditInvoice />
       </TabsContent>
 
       {/* Preview */}
