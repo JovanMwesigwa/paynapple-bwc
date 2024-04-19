@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import EditInvoice from "../../components/EditInvoice";
+import PreviewInvoicepdf from "../../components/PreviewInvoicepdf";
 
 export function TabsComponent() {
   const router = useRouter();
@@ -38,13 +39,8 @@ export function TabsComponent() {
 
       {/* Preview */}
       <TabsContent value="preview" className="p-4">
-        <div className="space-y-1">
-          <Label htmlFor="current">Current password</Label>
-          <Input id="current" type="password" />
-        </div>
-        <div className="space-y-1">
-          <Label htmlFor="new">New password</Label>
-          <Input id="new" type="password" />
+        <div className="h-screen ">
+          <PreviewInvoicepdf />
         </div>
       </TabsContent>
     </Tabs>
