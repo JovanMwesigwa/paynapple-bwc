@@ -1,6 +1,12 @@
 "use client";
 
-import { Link as LucideLink, PackageOpen, Receipt, User } from "lucide-react";
+import {
+  Link as LucideLink,
+  PackageOpen,
+  Receipt,
+  User,
+  Users,
+} from "lucide-react";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 
@@ -53,7 +59,7 @@ const BottomTabs = ({
           active === "user" ? " text-green-600" : "text-neutral-400"
         } w-full cursor-pointer`}
       >
-        <User className="" size={24} />
+        <Users className="" size={24} />
         {/* <p className="text-[10px] absolute ">Clients</p> */}
       </Button>
     </div>

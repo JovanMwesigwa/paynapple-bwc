@@ -1,4 +1,4 @@
-import { InvoiceEnum, InvoiceT, ProductT } from "@/types";
+import { ClientT, InvoiceEnum, InvoiceT, ProductT } from "@/types";
 
 export const invoices: InvoiceT[] = [
   {
@@ -163,5 +163,36 @@ export const Products: ProductT[] = [
     name: "Marketing Services",
     price: 4000,
     quantity: 1,
+  },
+];
+
+export const clients: ClientT[] = [
+  {
+    id: "1",
+    name: "Google",
+    email: "google@gmail.com",
+    phone: "256700713434",
+    address: "Kampala, Uganda",
+  },
+  {
+    id: "2",
+    name: "Twitter",
+    email: "twitter@gmail.com",
+    phone: "256700713435",
+    address: "Kampala, Uganda",
+  },
+  {
+    id: "3",
+    name: "Facebook",
+    email: "facebook@gmail.com",
+    phone: "256700713436",
+    address: "Kampala, Uganda",
+  },
+  {
+    id: "4",
+    name: "Amazon",
+    email: "amazon@gmail.com",
+    phone: "256700713437",
+    address: "Kampala, Uganda",
   },
 ];

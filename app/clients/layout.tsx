@@ -1,10 +1,13 @@
 import BottomTabs from "@/components/bottom-tabs";
 import React, { ReactNode } from "react";
+import ClientsHeader from "./clients-header";
 
 const UserLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="relative">
-      {children}
+      <ClientsHeader />
+
+      <main className="mt-28 p-4">{children}</main>
 
       <BottomTabs active="user" />
     </div>
