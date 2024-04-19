@@ -291,8 +291,8 @@ const styles = StyleSheet.create({
   },
   invoiceTitle: {
     fontSize: 18,
-
     color: "#f56a00", // Assuming orange from the logo for title
+    marginBottom: 4,
   },
   brandContainer: {
     display: "flex",
@@ -305,6 +305,7 @@ const styles = StyleSheet.create({
   textXs: {
     fontSize: 11,
     color: "#403f3e",
+    marginBottom: 4,
   },
   logoContainer: {
     display: "flex",
@@ -322,7 +323,8 @@ const styles = StyleSheet.create({
   textXsBold: {
     fontSize: 11,
     color: "#403f3e",
-    fontWeight: "semibold",
+    fontWeight: "extrabold",
+    marginBottom: 4,
   },
   itemsContainer: {
     display: "flex",
