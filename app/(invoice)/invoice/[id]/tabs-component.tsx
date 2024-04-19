@@ -50,7 +50,7 @@ export function TabsComponent({ invoice }: { invoice: InvoiceT }) {
               <Share2 size={20} />
             </Button>
 
-            <DownloadInvoice />
+            <DownloadInvoice invoice={invoice} />
           </div>
         </div>
       </TabsContent>

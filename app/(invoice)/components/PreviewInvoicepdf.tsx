@@ -37,7 +37,9 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
           {/* Bill to */}
           <View style={styles.titleContainer}>
             <View style={styles.brandContainer}>
-              <Text style={styles.textXsBold}>
+              <Text
+                style={{ ...styles.textXsBold, textDecoration: "underline" }}
+              >
                 Bill to: {invoice.client.name}
               </Text>
               <Text style={styles.textXs}>{invoice.client.email}</Text>
@@ -91,31 +93,40 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
             <View style={styles.titleContainer}>
               <View style={styles.brandContainer}>
                 <Text style={styles.textItalic}>{invoice.thankYouNotes}</Text>
-                <Text style={{ ...styles.textXsBold, marginTop: 10 }}>
+                <Text
+                  style={{
+                    ...styles.textXsBold,
+                    marginTop: 10,
+                    textDecoration: "underline",
+                  }}
+                >
                   Payment Info:
                 </Text>
                 <View style={styles.payContainer}>
-                  <View
-                    style={{
-                      width: 15,
-                      borderRadius: 2,
-                      height: 15,
-                      marginRight: 4,
-                      backgroundColor: "#03955E",
-                      alignItems: "center",
-                    }}
-                  />
-                  <View style={{ display: "flex" }}>
+                  <View style={{ display: "flex", flexDirection: "row" }}>
+                    <View
+                      style={{
+                        width: 15,
+                        borderRadius: 2,
+                        height: 15,
+                        marginRight: 4,
+                        backgroundColor: "#03955E",
+                        alignItems: "center",
+                      }}
+                    />
                     <Text
                       style={{
                         ...styles.textXsBold,
                         fontWeight: "bold",
                         marginRight: 4,
+                        textDecoration: "underline",
                       }}
                     >
-                      MiniPay:{" "}
+                      MiniPay:
                     </Text>
-                    <Text style={styles.textXs}>{invoice.minipaywallet}</Text>
+                    <View style={{ display: "flex" }}>
+                      <Text style={styles.textXs}>{invoice.minipaywallet}</Text>
+                    </View>
                   </View>
                 </View>
                 <View style={styles.payContainer}>
@@ -236,7 +247,9 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
               marginBottom: 6,
             }}
           >
-            <Text style={styles.textXsBold}>Customer note</Text>
+            <Text style={{ ...styles.textXsBold, textDecoration: "underline" }}>
+              Customer note
+            </Text>
             <Text style={styles.textXs}>{invoice.customerNotes}</Text>
           </View>
           <View
@@ -245,7 +258,9 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
               flexDirection: "column",
             }}
           >
-            <Text style={styles.textXsBold}>Invoice Terms</Text>
+            <Text style={{ ...styles.textXsBold, textDecoration: "underline" }}>
+              Invoice Terms
+            </Text>
             <Text style={styles.textXs}>{invoice.terms}</Text>
           </View>
         </Page>
