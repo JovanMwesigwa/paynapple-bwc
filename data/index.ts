@@ -1,4 +1,4 @@
-import { InvoiceEnum, InvoiceT } from "@/types";
+import { InvoiceEnum, InvoiceT, ProductT } from "@/types";
 
 export const invoices: InvoiceT[] = [
   {
@@ -132,3 +132,36 @@ export const emptyInvoice: InvoiceT = {
   dueDate: "2021-12-12",
   createdAt: "2021-11-12",
 };
+
+export const Products: ProductT[] = [
+  {
+    id: "1",
+    name: "Product 1",
+    price: 1000,
+    quantity: 1,
+  },
+  {
+    id: "2",
+    name: "Product 2",
+    price: 2000,
+    quantity: 2,
+  },
+  {
+    id: "3",
+    name: "Service Fee",
+    price: 2000,
+    quantity: 1,
+  },
+  {
+    id: "4",
+    name: "Consultation",
+    price: 3000,
+    quantity: 1,
+  },
+  {
+    id: "5",
+    name: "Marketing Services",
+    price: 4000,
+    quantity: 1,
+  },
+];
