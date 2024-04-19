@@ -1,14 +1,7 @@
-import { Button } from "@/components/ui/button";
-import {
-  Document,
-  Page,
-  StyleSheet,
-  Text,
-  View,
-  pdf,
-} from "@react-pdf/renderer";
-import { AudioWaveform, Download, Share2 } from "lucide-react";
-import React from "react";
+"use client";
+
+import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
+import { AudioWaveform } from "lucide-react";
 
 // Create Document Component
 const PreviewInvoicepdf = () => {
@@ -143,9 +136,21 @@ const PreviewInvoicepdf = () => {
                       height: 15,
                       marginRight: 4,
                       backgroundColor: "#03955E",
+                      alignItems: "center",
                     }}
                   />
-                  <Text style={styles.textXs}>MiniPay Wallet</Text>
+                  <View style={{ display: "flex" }}>
+                    <Text
+                      style={{
+                        ...styles.textXsBold,
+                        fontWeight: "bold",
+                        marginRight: 4,
+                      }}
+                    >
+                      MiniPay:{" "}
+                    </Text>
+                    <Text style={styles.textXs}>256789898989</Text>
+                  </View>
                 </View>
                 <View style={styles.payContainer}>
                   <View
@@ -155,6 +160,7 @@ const PreviewInvoicepdf = () => {
                       height: 15,
                       marginRight: 4,
                       backgroundColor: "#46CD85",
+                      alignItems: "center",
                     }}
                   />
                   <Text style={styles.textXs}>Celo Dollar | cUSD</Text>
@@ -167,6 +173,7 @@ const PreviewInvoicepdf = () => {
                       height: 15,
                       marginRight: 4,
                       backgroundColor: "#2670C4",
+                      alignItems: "center",
                     }}
                   />
                   <Text style={styles.textXs}>Circle | USDC</Text>
@@ -388,6 +395,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginTop: 4,
+    width: "100%",
   },
 });
 
