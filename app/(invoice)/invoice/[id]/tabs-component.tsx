@@ -1,12 +1,12 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Share2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import EditInvoice from "../../components/EditInvoice";
 import PreviewInvoicepdf from "../../components/PreviewInvoicepdf";
+import DownloadInvoice from "../../components/downloadInvoice";
 
 export function TabsComponent() {
   const router = useRouter();
@@ -39,8 +39,18 @@ export function TabsComponent() {
 
       {/* Preview */}
       <TabsContent value="preview" className="p-4">
-        <div className="h-screen ">
+        <div className="h-screen relative">
           <PreviewInvoicepdf />
+          <div className="flex w-full flex-row fixed h-16 bottom-0 justify-end right-0 z-20 left-0 px-4">
+            <Button
+              className="rounded-full bg-green-600 size-12 text-white mr-4 "
+              variant="ghost"
+            >
+              <Share2 size={20} />
+            </Button>
+
+            <DownloadInvoice />
+          </div>
         </div>
       </TabsContent>
     </Tabs>
