@@ -6,6 +6,8 @@ import Header from "./header";
 import BottomTabs from "../../components/bottom-tabs";
 import { Plus } from "lucide-react";
 import Link from "next/link";
+import FloatingButton from "@/components/FloatingButton";
+import ParentFloatingButton from "../components/ParentFloatingButton";
 
 export default function Home() {
   return (
@@ -35,14 +37,7 @@ export default function Home() {
         <Invoices />
       </div>
 
-      <Link href="/invoice">
-        <Button
-          variant="ghost"
-          className="fixed bottom-16 right-5 bg-green-600 rounded-full size-12 text-white"
-        >
-          <Plus size={18} />
-        </Button>
-      </Link>
+      <ParentFloatingButton link="invoice" />
       <BottomTabs active="home" />
     </div>
   );

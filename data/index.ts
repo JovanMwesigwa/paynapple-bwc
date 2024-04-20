@@ -196,3 +196,5 @@ export const clients: ClientT[] = [
     address: "Kampala, Uganda",
   },
 ];
+
+export const appUrl = "http://localhost:3000";

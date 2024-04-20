@@ -8,6 +8,7 @@ import EditInvoice from "../../components/EditInvoice";
 import PreviewInvoicepdf from "../../components/PreviewInvoicepdf";
 import DownloadInvoice from "../../components/DownloadInvoice";
 import { InvoiceT } from "@/types";
+import { ShareDrawer } from "@/app/components/Sheets/ShareDrawer";
 
 export function TabsComponent({ invoice }: { invoice: InvoiceT }) {
   const router = useRouter();
@@ -43,12 +44,7 @@ export function TabsComponent({ invoice }: { invoice: InvoiceT }) {
         <div className="h-screen relative">
           <PreviewInvoicepdf invoice={invoice} />
           <div className="flex w-full flex-row fixed h-16 bottom-0 justify-end right-0 z-20 left-0 px-4">
-            <Button
-              className="rounded-full bg-green-600 size-12 text-white mr-4 "
-              variant="ghost"
-            >
-              <Share2 size={20} />
-            </Button>
+            <ShareDrawer invoiceID={invoice.id} />
 
             <DownloadInvoice invoice={invoice} />
           </div>

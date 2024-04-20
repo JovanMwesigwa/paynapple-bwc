@@ -14,6 +14,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const EditInvoice = ({ invoice }: { invoice: InvoiceT }) => {
   return (
@@ -44,13 +45,15 @@ const EditInvoice = ({ invoice }: { invoice: InvoiceT }) => {
           />
 
           <div className="w-full h-14 mt-4 border border-dashed rounded-sm flex items-center justify-center border-neutral-400">
-            <div className="flex cursor-pointer flex-row items-center justify-center gap-x-2">
-              <PlusIcon size={20} className="text-green-500" />
-              <h1 className="font-light text-sm">
-                {" "}
-                {invoice.client ? "EDIT" : "ADD"} CLIENT
-              </h1>
-            </div>
+            <Link href="/client/new">
+              <div className="flex cursor-pointer flex-row items-center justify-center gap-x-2">
+                <PlusIcon size={20} className="text-green-500" />
+                <h1 className="font-light text-sm">
+                  {" "}
+                  {invoice.client ? "EDIT" : "ADD"} CLIENT
+                </h1>
+              </div>
+            </Link>
           </div>
         </div>
       </div>
@@ -64,10 +67,12 @@ const EditInvoice = ({ invoice }: { invoice: InvoiceT }) => {
         ))}
 
         <div className="w-full h-14 border border-dashed rounded-sm flex items-center justify-center border-neutral-400">
-          <div className="flex cursor-pointer flex-row items-center justify-center gap-x-2">
-            <PlusIcon size={20} className="text-green-500" />
-            <h1 className="font-light text-sm">ADD ITEM</h1>
-          </div>
+          <Link href="/product/new">
+            <div className="flex cursor-pointer flex-row items-center justify-center gap-x-2">
+              <PlusIcon size={20} className="text-green-500" />
+              <h1 className="font-light text-sm">ADD ITEM</h1>
+            </div>
+          </Link>
         </div>
       </div>
 
