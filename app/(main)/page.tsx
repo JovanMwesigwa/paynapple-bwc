@@ -1,17 +1,13 @@
-import { Button } from "@/components/ui/button";
+import BottomTabs from "../../components/bottom-tabs";
+import ParentFloatingButton from "../components/ParentFloatingButton";
 import SelectButtons from "../components/SelectButtons";
 import SwipeCard from "../components/SwipeCard";
 import Invoices from "./Invoices";
 import Header from "./header";
-import BottomTabs from "../../components/bottom-tabs";
-import { Plus } from "lucide-react";
-import Link from "next/link";
-import FloatingButton from "@/components/FloatingButton";
-import ParentFloatingButton from "../components/ParentFloatingButton";
 
 export default function Home() {
   return (
-    <div className="bg-white flex relative flex-1 flex-col overflow-y-auto">
+    <div className="bg-neutral-100 flex relative flex-1 flex-col overflow-y-auto">
       <Header />
       <div className="p-4 flex flex-1 flex-col overflow-y-auto h-full mt-5">
         <div className="mt-4 grid grid-cols-3 gap-4 h-20">
