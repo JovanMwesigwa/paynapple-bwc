@@ -28,6 +28,7 @@ export type ClientT = {
   email: string;
   phone: string;
   address: string;
+  notes?: string;
 };
 
 export type ProductT = {
@@ -35,6 +36,7 @@ export type ProductT = {
   name: string;
   price: number;
   quantity: number;
+  description?: string;
 };
 
 export type PayLinkT = {

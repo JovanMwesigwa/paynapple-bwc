@@ -30,6 +30,7 @@ const ProductDetails = () => {
         <Input
           className="w-full rounded-sm my-1 border outline-none"
           value="Service"
+          disabled
         />
       </div>
 

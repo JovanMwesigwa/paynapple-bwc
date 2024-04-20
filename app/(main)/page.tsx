@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className="bg-neutral-100 flex relative flex-1 flex-col overflow-y-auto">
       <Header />
-      <div className="p-4 flex flex-1 flex-col overflow-y-auto h-full mt-5">
+      <div className="p-4 flex flex-1 flex-col overflow-y-auto h-full mt-12">
         <div className="mt-4 grid grid-cols-3 gap-4 h-20">
           <SwipeCard color="bg-blue-100" amount={30000} count={2} top="All" />
 

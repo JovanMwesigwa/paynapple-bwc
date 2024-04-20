@@ -12,7 +12,7 @@ import {
 import Image from "next/image";
 import { AssetsEnum } from "@/types";
 
-export function SelectAsset({ asset }: { asset: AssetsEnum | undefined }) {
+export function SelectAsset({ asset }: { asset?: AssetsEnum | undefined }) {
   return (
     <Select>
       <SelectTrigger className="w-full my-2 outline-none">

@@ -33,7 +33,7 @@ const ClientDetails = () => {
         <div className="flex flex-col w-full relative">
           <Label className="text-green-500 font-medium">Phone Number</Label>
           <Input
-            type="number"
+            type="tel"
             className="w-full rounded-sm my-1 border outline-none"
           />
           <Phone
