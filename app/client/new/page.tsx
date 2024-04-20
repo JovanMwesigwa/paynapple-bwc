@@ -1,3 +1,4 @@
+import SubmitBtn from "@/app/components/Buttons/SubmitBtn";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -49,12 +50,7 @@ const ClientDetails = () => {
         />
       </div>
 
-      <Button
-        className="bg-green-500 text-white rounded-full hover:text-green-500 text-base "
-        variant="ghost"
-      >
-        Save
-      </Button>
+      <SubmitBtn title="Create Client" />
     </div>
   );
 };

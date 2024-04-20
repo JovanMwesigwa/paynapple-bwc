@@ -1,8 +1,5 @@
-import { Separator } from "@/components/ui/separator";
-import { GripVertical } from "lucide-react";
-import React from "react";
-import InnerProductCard from "./product-card";
 import { Products } from "@/data";
+import InnerProductCard from "./product-card";
 
 const AllProductsPage = () => {
   return (
