@@ -1,14 +1,13 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, Share2 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import EditInvoice from "../../components/EditInvoice";
-import PreviewInvoicepdf from "../../components/PreviewInvoicepdf";
-import DownloadInvoice from "../../components/DownloadInvoice";
-import { InvoiceT } from "@/types";
 import { ShareDrawer } from "@/app/components/Sheets/ShareDrawer";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { InvoiceT } from "@/types";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+import DownloadInvoice from "../../../components/DownloadInvoice";
+import EditInvoice from "../../../components/EditInvoice";
+import PreviewInvoicepdf from "../../../components/PreviewInvoicepdf";
 
 export function TabsComponent({ invoice }: { invoice: InvoiceT }) {
   const router = useRouter();

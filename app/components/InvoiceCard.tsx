@@ -23,7 +23,7 @@ const InvoiceCard = ({ invoice }: { invoice: InvoiceT }) => {
       ? "bg-orange-100"
       : "bg-red-100";
   return (
-    <Link href={`/invoice/${invoice.id}`}>
+    <Link href={`/invoice/edit/${invoice.id}`}>
       <div className="flex justify-between my-5 items-center p-4 bg-white rounded-lg shadow-md ">
         <div className="flex flex-1 flex-col gap-y-1">
           <div className="">
