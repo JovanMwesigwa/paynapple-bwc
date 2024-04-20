@@ -10,12 +10,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Image from "next/image";
+import { AssetsEnum } from "@/types";
 
-export function SelectAsset() {
+export function SelectAsset({ asset }: { asset: AssetsEnum | undefined }) {
   return (
     <Select>
       <SelectTrigger className="w-full my-2 outline-none">
-        <SelectValue placeholder="Select an asset" />
+        <SelectValue placeholder="Select an asset" defaultValue={asset} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>

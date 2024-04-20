@@ -1,4 +1,4 @@
-import { ClientT, InvoiceEnum, InvoiceT, ProductT } from "@/types";
+import { ClientT, InvoiceEnum, InvoiceT, PayLinkT, ProductT } from "@/types";
 
 export const invoices: InvoiceT[] = [
   {
@@ -194,6 +194,57 @@ export const clients: ClientT[] = [
     email: "amazon@gmail.com",
     phone: "256700713437",
     address: "Kampala, Uganda",
+  },
+];
+
+export const payLinks: PayLinkT[] = [
+  {
+    id: "1",
+    title: "UpWork link",
+    asset: "cUSD",
+    amount: 5000,
+    status: "Pending",
+    fixed: false,
+    invoice: invoices[0],
+    url: "http://localhost:3000/pay/1",
+    createdAt: "2021-11-12",
+    updatedAt: "2021-11-12",
+  },
+  {
+    id: "2",
+    title: "Twitter link",
+    asset: "USDC",
+    amount: 2000,
+    status: "Pending",
+    fixed: false,
+    invoice: invoices[1],
+    url: "http://localhost:3000/pay/2",
+    createdAt: "2021-11-12",
+    updatedAt: "2021-11-12",
+  },
+  {
+    id: "3",
+    title: "Facebook link",
+    asset: "USDT",
+    amount: 3000,
+    status: "Pending",
+    fixed: false,
+    invoice: invoices[2],
+    url: "http://localhost:3000/pay/3",
+    createdAt: "2021-11-12",
+    updatedAt: "2021-11-12",
+  },
+  {
+    id: "4",
+    title: "Amazon link",
+    asset: "USDC",
+    amount: 4000,
+    status: "Pending",
+    fixed: false,
+    invoice: invoices[3],
+    url: "http://localhost:3000/pay/4",
+    createdAt: "2021-11-12",
+    updatedAt: "2021-11-12",
   },
 ];
 

@@ -1,7 +1,5 @@
-import { appUrl } from "@/data";
-import ParentFloatingButton from "../components/ParentFloatingButton";
+import { payLinks } from "@/data";
 import LinksHeader from "./links-header";
-import { Separator } from "@/components/ui/separator";
 import PayLinkCard from "./pay-link-card";
 
 const AllLinksPage = () => {
@@ -9,11 +7,9 @@ const AllLinksPage = () => {
     <div className="flex flex-col gap-y-6">
       <LinksHeader />
 
-      <PayLinkCard />
-      <PayLinkCard />
-      <PayLinkCard />
-      <PayLinkCard />
-      <PayLinkCard />
+      {payLinks.map((payLink) => (
+        <PayLinkCard key={payLink.id} item={payLink} />
+      ))}
     </div>
   );
 };

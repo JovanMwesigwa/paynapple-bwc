@@ -36,3 +36,19 @@ export type ProductT = {
   price: number;
   quantity: number;
 };
+
+export type PayLinkT = {
+  id: string;
+  title: string;
+  asset: AssetsEnum;
+  amount: number;
+  status: string;
+  fixed: boolean;
+  description?: string;
+  url: string;
+  invoice?: InvoiceT;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type AssetsEnum = "cUSD" | "USDC" | "USDT";

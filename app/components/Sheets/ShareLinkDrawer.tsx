@@ -21,9 +21,10 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "next-share";
+import { PayLinkT } from "@/types";
 
-export function ShareLinkDrawer({ linkID }: { linkID: string }) {
-  const shareUrl = appUrl + "/pay/" + linkID;
+export function ShareLinkDrawer({ link }: { link: PayLinkT }) {
+  const shareUrl = link.url;
 
   return (
     <Drawer>
