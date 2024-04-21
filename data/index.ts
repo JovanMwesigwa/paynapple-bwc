@@ -276,4 +276,8 @@ export const payLinks: PayLinkT[] = [
   },
 ];
 
-export const appUrl = "http://localhost:3000";
+// Development
+// export const appUrl = "http://localhost:3000";
+
+// Production
+export const appUrl = "https://paynapple.vercel.app";
