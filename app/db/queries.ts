@@ -49,6 +49,10 @@ export const getAllInvoices = async (wallet: string) => {
     where: {
       wallet,
     },
+    include: {
+      products: true,
+      client: true,
+    },
   });
 };
 

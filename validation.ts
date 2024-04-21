@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+const InvoiceEnumSchema = z.enum(["Unpaid", "Partially", "Paid", "Rejected"]);
+
 export const productSchema = z.object({
   wallet: z.string(),
   name: z.string(),
@@ -25,4 +27,17 @@ export const payLinkSchema = z.object({
   fixed: z.boolean(),
   url: z.string(),
   description: z.string().optional(),
+});
+
+export const InvoiceSchema = z.object({
+  id: z.number().optional(), // This is typically not provided by the user but by the database
+  wallet: z.string(),
+  clientId: z.number(),
+  invoiceNumber: z.string(),
+  subTotal: z.number(),
+  total: z.number(),
+  category: InvoiceEnumSchema,
+  terms: z.string().optional(),
+  customerNotes: z.string().optional(),
+  thankYouNotes: z.string().optional(),
 });

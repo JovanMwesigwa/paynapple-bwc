@@ -32,3 +32,18 @@ export const createNewPayLink = async (data: any) => {
 export const updatePayLink = async (id: number, data: any) => {
   return await prisma.payLink.update({ where: { id }, data });
 };
+
+export const createInvoice = async (data: any) => {
+  const { products, ...invoiceData } = data;
+
+  return await prisma.invoice.create({
+    data: {
+      ...invoiceData,
+      products: {
+        connect: products.map((product: any) => ({
+          id: product.id, // Connect using the existing product IDs
+        })),
+      },
+    },
+  });
+};

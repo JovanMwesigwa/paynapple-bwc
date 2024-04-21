@@ -1,7 +1,7 @@
 "use client";
 
 import { Products } from "@/data";
-import InnerProductCard from "./product-card";
+import InnerProductCard from "../components/product-card";
 import useFetchAll from "../hooks/useFetchAll";
 import { upsertGetAllProducts } from "../actions/products";
 import { Product } from "@prisma/client";

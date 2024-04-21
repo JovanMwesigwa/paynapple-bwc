@@ -1,33 +1,43 @@
 import ClientCard from "@/app/components/ClientCard";
 import ProductCard from "@/app/components/ProductCard";
 import ClientsDrawer from "@/app/components/Sheets/ClientsDrawer";
-import FloatingButton from "@/components/FloatingButton";
+import ProductsDrawer from "@/app/components/Sheets/ProductsDrawer";
 import { Separator } from "@/components/ui/separator";
 import { ClientT, InvoiceT } from "@/types";
-import { Client } from "@prisma/client";
+import { Client, Product } from "@prisma/client";
 import {
   AudioWaveform,
   CreditCard,
   Heart,
-  MenuIcon,
   PanelBottomOpen,
-  Plus,
-  PlusIcon,
   ShieldCheck,
 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
 
 const EditInvoice = ({
   invoice,
   client,
   setClient,
+  products,
+  setProducts,
+  terms,
+  customerNotes,
+  thankYouNotes,
+  invoiceNumber,
 }: {
   invoice: InvoiceT;
   client: Client | ClientT | null;
   setClient: any;
+  products: Product[] | [];
+  setProducts: any;
+  terms: string;
+  customerNotes: string;
+  thankYouNotes: string;
+  invoiceNumber: string;
 }) => {
+  const invoiceProducts =
+    invoice.products.length > 0 ? invoice.products : products;
+
   return (
     <div className="flex flex-1 flex-col gap-y-4">
       {/* Header */}
@@ -52,7 +62,7 @@ const EditInvoice = ({
         <div className="flex flex-1 flex-col gap-y-1 ">
           <ClientCard
             client={client ? client : invoice.client}
-            invoiceNumber={invoice.invoiceNumber}
+            invoiceNumber={invoiceNumber}
           />
 
           <div className="w-full h-14 mt-4 border border-dashed rounded-sm flex items-center justify-center border-neutral-400">
@@ -65,17 +75,12 @@ const EditInvoice = ({
 
       {/* Items */}
       <div className="flex flex-col w-full gap-y-4">
-        {invoice.products.map((product) => (
+        {invoiceProducts.map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}
 
         <div className="w-full h-14 border border-dashed rounded-sm flex items-center justify-center border-neutral-400">
-          <Link href="/products/?pick">
-            <div className="flex cursor-pointer flex-row items-center justify-center gap-x-2">
-              <PlusIcon size={20} className="text-green-500" />
-              <h1 className="font-light text-sm">ADD ITEM</h1>
-            </div>
-          </Link>
+          <ProductsDrawer products={products} setProducts={setProducts} />
         </div>
       </div>
 
@@ -195,7 +200,7 @@ const EditInvoice = ({
               <ShieldCheck size={20} className="text-green-500" />
               <div className="flex flex-col">
                 <h1 className="text-sm ">Terms & conditions</h1>
-                <h1 className="text-xs font-light">{invoice.terms}</h1>
+                <h1 className="text-xs font-light">{terms}</h1>
               </div>
             </div>
           </div>
@@ -205,7 +210,7 @@ const EditInvoice = ({
               <PanelBottomOpen size={20} className="text-green-500" />
               <div className="flex flex-col">
                 <h1 className="text-sm ">Customer note</h1>
-                <h1 className="text-xs font-light">{invoice.customerNotes}</h1>
+                <h1 className="text-xs font-light">{customerNotes}</h1>
               </div>
             </div>
           </div>
@@ -215,14 +220,14 @@ const EditInvoice = ({
               <Heart size={20} className="text-green-500" />
               <div className="flex flex-col">
                 <h1 className="text-sm ">Thank you note</h1>
-                <h1 className="text-xs font-light">{invoice.thankYouNotes}</h1>
+                <h1 className="text-xs font-light">{thankYouNotes}</h1>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <FloatingButton Icon={MenuIcon} />
+      {/* <FloatingButton Icon={MenuIcon} /> */}
     </div>
   );
 };

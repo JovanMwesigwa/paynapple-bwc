@@ -1,9 +1,7 @@
 import { Separator } from "@/components/ui/separator";
-import { ProductT } from "@/types";
 import { Product } from "@prisma/client";
 import { GripVertical } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 
 const InnerProductCard = ({ product }: { product: Product }) => {
   return (

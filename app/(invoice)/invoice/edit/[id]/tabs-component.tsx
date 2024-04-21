@@ -1,18 +1,35 @@
 "use client";
 
-import { ShareDrawer } from "@/app/components/Sheets/ShareDrawer";
+import EditPreviewInvoicepdf from "@/app/(invoice)/components/EditPreviewpdf";
+import SaveButton from "@/app/(invoice)/components/SaveButton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { InvoiceT } from "@/types";
+import { Client, Product } from "@prisma/client";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import DownloadInvoice from "../../../components/DownloadInvoice";
-import EditInvoice from "../../../components/EditInvoice";
-import PreviewInvoicepdf from "../../../components/PreviewInvoicepdf";
 import { useState } from "react";
-import { Client } from "@prisma/client";
+import EditInvoice from "../../../components/EditInvoice";
 
 export function TabsComponent({ invoice }: { invoice: InvoiceT }) {
   const [client, setClient] = useState<Client | null>(null);
+
+  const [products, setProducts] = useState<Product[] | []>([]);
+
+  const [generatedInvoiceNumber, setGeneratedInvoiceNumber] = useState<string>(
+    `INV-${Math.floor(1000 + Math.random() * 9000).toString()}`
+  );
+
+  const [terms, setTerms] = useState<string>(
+    "Payment should be made within 30 days"
+  );
+
+  const [customerNotes, setCustomerNotes] = useState<string>(
+    "Please make payments on time"
+  );
+
+  const [thankYouNotes, setThankYouNotes] = useState<string>(
+    "Thank you for your business"
+  );
 
   const router = useRouter();
 
@@ -39,17 +56,47 @@ export function TabsComponent({ invoice }: { invoice: InvoiceT }) {
 
       {/* Edit */}
       <TabsContent value="edit" className="p-4">
-        <EditInvoice invoice={invoice} client={client} setClient={setClient} />
+        <EditInvoice
+          invoice={invoice}
+          client={client}
+          setClient={setClient}
+          products={products}
+          setProducts={setProducts}
+          terms={terms}
+          customerNotes={customerNotes}
+          thankYouNotes={thankYouNotes}
+          invoiceNumber={generatedInvoiceNumber}
+        />
       </TabsContent>
 
       {/* Preview */}
       <TabsContent value="preview" className="p-4">
         <div className="h-screen relative">
-          <PreviewInvoicepdf invoice={invoice} />
-          <div className="flex w-full flex-row fixed h-16 bottom-0 justify-end right-0 z-20 left-0 px-4">
-            <ShareDrawer invoiceID={invoice.id} />
+          {/* <PreviewInvoicepdf invoice={invoice} /> */}
 
-            <DownloadInvoice invoice={invoice} />
+          <EditPreviewInvoicepdf
+            invoice={invoice}
+            products={products}
+            client={client}
+            terms={terms}
+            customerNotes={customerNotes}
+            thankYouNotes={thankYouNotes}
+            invoiceNumber={generatedInvoiceNumber}
+          />
+
+          <div className="flex w-full flex-row fixed h-16 bottom-0 justify-end right-0 z-20 left-0 px-4">
+            {/* <ShareDrawer invoiceID={invoice.id} />
+
+            <DownloadInvoice invoice={invoice} /> */}
+
+            <SaveButton
+              client={client?.id}
+              invoiceNumber={generatedInvoiceNumber}
+              terms={terms}
+              customerNotes={customerNotes}
+              thankYouNotes={thankYouNotes}
+              products={products}
+            />
           </div>
         </div>
       </TabsContent>

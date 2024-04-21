@@ -14,13 +14,13 @@ model Invoice {
   clientId      Int
   invoiceNumber String
   category      InvoiceEnum
+  subTotal      Float
+  total         Float
   terms         String?
+  products      Product[]
   customerNotes String?
   thankYouNotes String?
-  dueDate       DateTime
-  minipaywallet String
   createdAt     DateTime    @default(now())
-  PayLink       PayLink[]
 }
 
 model Client {
@@ -34,12 +34,14 @@ model Client {
 }
 
 model Product {
-  id          Int     @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   wallet      String
   name        String
   price       Float
   quantity    Int
   description String?
+  Invoice     Invoice? @relation(fields: [invoiceId], references: [id])
+  invoiceId   Int?
 }
 
 model PayLink {
@@ -52,8 +54,6 @@ model PayLink {
   fixed       Boolean
   description String?
   url         String
-  invoiceId   Int?
-  invoice     Invoice?   @relation(fields: [invoiceId], references: [id])
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 }

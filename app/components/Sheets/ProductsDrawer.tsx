@@ -8,34 +8,35 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
-import { upsertGetAllClients } from "@/app/actions/clients";
+import { upsertGetAllProducts } from "@/app/actions/products";
 import useFetchAll from "@/app/hooks/useFetchAll";
-import { ClientT } from "@/types";
-import { Client } from "@prisma/client";
+import { Product } from "@prisma/client";
 import { PlusIcon, X } from "lucide-react";
 import { useState } from "react";
-import ClientCard from "../clients-card";
+import ProductCard from "../ProductCard";
 
-const ClientsDrawer = ({
-  setClient,
-  client,
+const ProductsDrawer = ({
+  products,
+  setProducts,
 }: {
-  setClient: any;
-  client: Client | null | ClientT;
+  products: Product[];
+  setProducts: any;
 }) => {
   const [open, setOpen] = useState(false);
 
-  const { data, isLoading, error } = useFetchAll(
-    upsertGetAllClients,
-    "getAllClients"
+  const { data, isLoading, isError } = useFetchAll(
+    upsertGetAllProducts,
+    "products"
   );
 
-  const handleClientClick = (client: Client) => {
-    setClient(client);
+  if (!data) return null;
+
+  const selectedProducts = data ? data : products;
+
+  const selectProducts = (product: Product) => {
+    setProducts((prev: Product[]) => [...prev, product]);
     setOpen(false);
   };
-
-  if (!data) return null;
 
   return (
     <Drawer open={open}>
@@ -47,7 +48,8 @@ const ClientsDrawer = ({
           <PlusIcon size={20} className="text-green-500" />
           <h1 className="font-light text-sm">
             {" "}
-            {client ? "EDIT" : "ADD"} CLIENT
+            {/* {client ? "EDIT" : "ADD"} CLIENT */}
+            ADD ITEM
           </h1>
         </div>
       </DrawerTrigger>
@@ -67,12 +69,12 @@ const ClientsDrawer = ({
             </div>
           </DrawerTitle>
         </DrawerHeader>
-        <div className="p-4 h-[450px]">
-          {data.map((client: Client) => (
-            <ClientCard
-              key={client.id}
-              client={client}
-              setClient={handleClientClick}
+        <div className="p-4 h-[500px]">
+          {selectedProducts.map((product: Product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              setProducts={selectProducts}
             />
           ))}
         </div>
@@ -81,4 +83,4 @@ const ClientsDrawer = ({
   );
 };
 
-export default ClientsDrawer;
+export default ProductsDrawer;

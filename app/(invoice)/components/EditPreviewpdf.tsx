@@ -1,11 +1,44 @@
 "use client";
 
-import { InvoiceT } from "@/types";
+import { ClientT, InvoiceT, ProductT } from "@/types";
+import { Client, Product } from "@prisma/client";
 import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 import { AudioWaveform } from "lucide-react";
+import { useEffect, useState } from "react";
 
 // Create Document Component
-const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
+const EditPreviewInvoicepdf = ({
+  invoice,
+  products,
+  client,
+  terms,
+  customerNotes,
+  thankYouNotes,
+  invoiceNumber,
+}: {
+  invoice: InvoiceT;
+  products: Product[] | ProductT[] | [];
+  client: Client | ClientT | null;
+  terms: string;
+  customerNotes: string;
+  thankYouNotes: string;
+  invoiceNumber: string;
+}) => {
+  const [total, setTotal] = useState(0);
+
+  //   Calculate total
+  const calculateTotal = () => {
+    let total = 0;
+    products.forEach((product) => {
+      total += Number(product.price) * Number(product.quantity);
+    });
+    setTotal(total);
+  };
+
+  useEffect(() => {
+    calculateTotal();
+  }, [products]);
+
   if (!invoice) return null;
 
   return (
@@ -28,7 +61,7 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
 
             <View style={styles.brandContainer}>
               <Text style={styles.invoiceTitle}>INVOICE</Text>
-              <Text style={styles.textXs}>#INV0002</Text>
+              <Text style={styles.textXs}>#{invoiceNumber}</Text>
               <Text style={styles.textXs}>Date: 04/08/2024</Text>
               <Text style={styles.textXs}>Due Date: 04/24/2024</Text>
             </View>
@@ -40,10 +73,10 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
               <Text
                 style={{ ...styles.textXsBold, textDecoration: "underline" }}
               >
-                Bill to: {invoice.client.name}
+                Bill to: {client?.name}
               </Text>
-              <Text style={styles.textXs}>{invoice.client.email}</Text>
-              <Text style={styles.textXs}>{invoice.client.phone}</Text>
+              <Text style={styles.textXs}>{client?.email}</Text>
+              <Text style={styles.textXs}>{client?.phone}</Text>
             </View>
           </View>
 
@@ -67,7 +100,7 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
               </View>
             </View>
 
-            {invoice.products.map((product, index) => (
+            {products.map((product, index) => (
               <View style={styles.tableItem} key={product.id}>
                 <View style={styles.tableItemContainerStart}>
                   <Text>{index + 1}</Text>
@@ -92,7 +125,7 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
           <View style={styles.paymentInfoContainer}>
             <View style={styles.titleContainer}>
               <View style={styles.brandContainer}>
-                <Text style={styles.textItalic}>{invoice.thankYouNotes}</Text>
+                <Text style={styles.textItalic}>{thankYouNotes}</Text>
                 <Text
                   style={{
                     ...styles.textXsBold,
@@ -172,7 +205,7 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
                   }}
                 >
                   <Text style={styles.textXsBold}>SubTotal</Text>
-                  <Text style={styles.textXsBold}>${invoice.amount}</Text>
+                  <Text style={styles.textXsBold}>${total}</Text>
                 </View>
 
                 <View
@@ -186,7 +219,7 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
                   }}
                 >
                   <Text style={styles.textXsBold}>Total</Text>
-                  <Text style={styles.textXsBold}>${invoice.amount}</Text>
+                  <Text style={styles.textXsBold}>${total}</Text>
                 </View>
 
                 <View
@@ -200,7 +233,7 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
                   }}
                 >
                   <Text style={styles.textXsBold}>Balance Due</Text>
-                  <Text style={styles.textXsBold}>${invoice.amount}</Text>
+                  <Text style={styles.textXsBold}>${total}</Text>
                 </View>
 
                 <View
@@ -250,7 +283,7 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
             <Text style={{ ...styles.textXsBold, textDecoration: "underline" }}>
               Customer note
             </Text>
-            <Text style={styles.textXs}>{invoice.customerNotes}</Text>
+            <Text style={styles.textXs}>{customerNotes}</Text>
           </View>
           <View
             style={{
@@ -261,7 +294,7 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
             <Text style={{ ...styles.textXsBold, textDecoration: "underline" }}>
               Invoice Terms
             </Text>
-            <Text style={styles.textXs}>{invoice.terms}</Text>
+            <Text style={styles.textXs}>{terms}</Text>
           </View>
         </Page>
       </Document>
@@ -388,4 +421,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PreviewInvoicepdf;
+export default EditPreviewInvoicepdf;
