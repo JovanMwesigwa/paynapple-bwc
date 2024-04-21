@@ -1,7 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight, SendHorizonal, Wallet } from "lucide-react";
-import Link from "next/link";
-import React from "react";
+"use client";
+
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useAccount } from "wagmi";
+import PaynappleLogo from "../components/PaynappleLogo";
 
 const SwiperScreen = ({
   btn,
@@ -12,16 +15,19 @@ const SwiperScreen = ({
   title: string;
   subTilte: string;
 }) => {
+  const { isConnected } = useAccount();
+
+  const router = useRouter();
+
+  // Navigate to the dashboard if the user is already connected
+
+  if (isConnected) {
+    router.push("/dashboard");
+  }
+
   return (
     <div className="flex flex-col  justify-center text-white  h-full py-5">
-      <div className="flex flex-row items-center gap-x-2 px-4">
-        <div className="bg-white rounded-md size-6 flex items-center justify-center">
-          <h1 className="self-start text-md font-extrabold ">🍏</h1>
-        </div>
-        <div className="">
-          <h1 className="self-start text-lg font-extrabold ">Paynapple</h1>
-        </div>
-      </div>
+      <PaynappleLogo />
 
       <div className="flex flex-1 flex-col px-4 py-4">
         <div className="flex flex-1"></div>
@@ -34,13 +40,26 @@ const SwiperScreen = ({
 
       <div className="flex flex-row w-full items-center justify-center mt-3 px-4">
         {btn ? (
-          <Link
-            href="/dashboard"
-            className="w-full bg-red-500 flex flex-row gap-x-2 rounded-md  items-center justify-center p-2"
-          >
-            Connect Wallet
-            <Wallet size={18} />
-          </Link>
+          // <Link
+          //   href="/dashboard"
+          //   className="w-full bg-red-500 flex flex-row gap-x-2 rounded-md  items-center justify-center p-2"
+          // >
+          //   Connect Wallet
+          //   <Wallet size={18} />
+          // </Link>
+          <div className="w-full flex flex-row gap-x-2 items-center justify-evenly italic">
+            {isConnected ? (
+              <>
+                Sign In 👉
+                <ConnectButton />
+              </>
+            ) : (
+              <>
+                Connect your wallet 👉
+                <ConnectButton />
+              </>
+            )}
+          </div>
         ) : (
           <div className="w-full flex flex-row gap-x-2 items-center justify-end italic">
             Swipe to continue 👉

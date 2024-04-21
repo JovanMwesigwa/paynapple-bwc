@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
+import RainbowkitProvider from "./providers/rainbowkit-provider";
+import Authmiddleware from "./providers/authmiddleware";
 
 const font = Nunito({ subsets: ["latin"] });
 
@@ -16,7 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={font.className}>{children}</body>
+      <body className={font.className}>
+        <RainbowkitProvider>
+          <Authmiddleware>{children}</Authmiddleware>
+        </RainbowkitProvider>
+      </body>
     </html>
   );
 }
