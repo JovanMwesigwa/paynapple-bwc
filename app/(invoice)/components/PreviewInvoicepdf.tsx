@@ -110,27 +110,29 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: Invoice }) => {
                   Payment Info:
                 </Text>
                 <View style={styles.payContainer}>
-                  <View style={{ display: "flex", flexDirection: "row" }}>
-                    <View
-                      style={{
-                        width: 15,
-                        borderRadius: 2,
-                        height: 15,
-                        marginRight: 4,
-                        backgroundColor: "#03955E",
-                        alignItems: "center",
-                      }}
-                    />
-                    <Text
-                      style={{
-                        ...styles.textXsBold,
-                        fontWeight: "bold",
-                        marginRight: 4,
-                        textDecoration: "underline",
-                      }}
-                    >
-                      MiniPay:
-                    </Text>
+                  <View style={{ display: "flex", flexDirection: "column" }}>
+                    <View style={{ display: "flex", flexDirection: "row" }}>
+                      <View
+                        style={{
+                          width: 15,
+                          borderRadius: 2,
+                          height: 15,
+                          marginRight: 4,
+                          backgroundColor: "#03955E",
+                          alignItems: "center",
+                        }}
+                      />
+                      <Text
+                        style={{
+                          ...styles.textXsBold,
+                          fontWeight: "bold",
+                          marginRight: 4,
+                          textDecoration: "underline",
+                        }}
+                      >
+                        MiniPay:
+                      </Text>
+                    </View>
                     <View style={{ display: "flex" }}>
                       <Text style={styles.textXs}>{invoice.wallet}</Text>
                     </View>

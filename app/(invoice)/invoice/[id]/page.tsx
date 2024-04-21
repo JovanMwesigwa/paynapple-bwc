@@ -1,17 +1,30 @@
 "use client";
 
-import { invoices } from "@/data";
+import { upsertGetInvoiceById } from "@/app/actions/invoices";
+import useFetchOne from "@/app/hooks/useFetch";
+import { Product } from "@prisma/client";
 import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
-import { AudioWaveform } from "lucide-react";
+import { AudioWaveform, Loader } from "lucide-react";
 import { useParams } from "next/navigation";
 
 // Create Document Component
 const PreviewInvoicepdfPage = () => {
   const { id } = useParams();
 
-  const invoice = invoices.find((invoice) => invoice.id === id);
+  const { data, isLoading, error } = useFetchOne(
+    upsertGetInvoiceById,
+    Number(id),
+    "getInvoice"
+  );
 
-  if (!invoice) return null;
+  if (isLoading)
+    return (
+      <div className="flex flex-1 items-center justify-center">
+        <Loader size={16} />
+      </div>
+    );
+
+  if (!data) return null;
 
   return (
     <>
@@ -45,10 +58,10 @@ const PreviewInvoicepdfPage = () => {
               <Text
                 style={{ ...styles.textXsBold, textDecoration: "underline" }}
               >
-                Bill to: {invoice.client.name}
+                Bill to: {data.client.name}
               </Text>
-              <Text style={styles.textXs}>{invoice.client.email}</Text>
-              <Text style={styles.textXs}>{invoice.client.phone}</Text>
+              <Text style={styles.textXs}>{data.client.email}</Text>
+              <Text style={styles.textXs}>{data.client.phone}</Text>
             </View>
           </View>
 
@@ -72,32 +85,35 @@ const PreviewInvoicepdfPage = () => {
               </View>
             </View>
 
-            {invoice.products.map((product, index) => (
-              <View style={styles.tableItem} key={product.id}>
-                <View style={styles.tableItemContainerStart}>
-                  <Text>{index + 1}</Text>
+            {data.products &&
+              data.products.map((product: Product, index: any) => (
+                <View style={styles.tableItem} key={product.id}>
+                  <View style={styles.tableItemContainerStart}>
+                    <Text>{index + 1}</Text>
+                  </View>
+                  <View style={styles.tableItemContainer}>
+                    <Text>{product.name}</Text>
+                  </View>
+                  <View style={styles.tableItemContainer}>
+                    <Text>{product.quantity}</Text>
+                  </View>
+                  <View style={styles.tableItemContainer}>
+                    <Text>${product.price.toFixed(2)}</Text>
+                  </View>
+                  <View style={styles.tableItemContainerEnd}>
+                    <Text>
+                      ${(product.price * product.quantity).toFixed(2)}
+                    </Text>
+                  </View>
                 </View>
-                <View style={styles.tableItemContainer}>
-                  <Text>{product.name}</Text>
-                </View>
-                <View style={styles.tableItemContainer}>
-                  <Text>{product.quantity}</Text>
-                </View>
-                <View style={styles.tableItemContainer}>
-                  <Text>${product.price.toFixed(2)}</Text>
-                </View>
-                <View style={styles.tableItemContainerEnd}>
-                  <Text>${(product.price * product.quantity).toFixed(2)}</Text>
-                </View>
-              </View>
-            ))}
+              ))}
           </View>
 
           {/* Payment info */}
           <View style={styles.paymentInfoContainer}>
             <View style={styles.titleContainer}>
               <View style={styles.brandContainer}>
-                <Text style={styles.textItalic}>{invoice.thankYouNotes}</Text>
+                <Text style={styles.textItalic}>{data.thankYouNotes}</Text>
                 <Text
                   style={{
                     ...styles.textXsBold,
@@ -108,29 +124,31 @@ const PreviewInvoicepdfPage = () => {
                   Payment Info:
                 </Text>
                 <View style={styles.payContainer}>
-                  <View style={{ display: "flex", flexDirection: "row" }}>
-                    <View
-                      style={{
-                        width: 15,
-                        borderRadius: 2,
-                        height: 15,
-                        marginRight: 4,
-                        backgroundColor: "#03955E",
-                        alignItems: "center",
-                      }}
-                    />
-                    <Text
-                      style={{
-                        ...styles.textXsBold,
-                        fontWeight: "bold",
-                        marginRight: 4,
-                        textDecoration: "underline",
-                      }}
-                    >
-                      MiniPay:
-                    </Text>
+                  <View style={{ display: "flex", flexDirection: "column" }}>
+                    <View style={{ display: "flex", flexDirection: "row" }}>
+                      <View
+                        style={{
+                          width: 15,
+                          borderRadius: 2,
+                          height: 15,
+                          marginRight: 4,
+                          backgroundColor: "#03955E",
+                          alignItems: "center",
+                        }}
+                      />
+                      <Text
+                        style={{
+                          ...styles.textXsBold,
+                          fontWeight: "bold",
+                          marginRight: 4,
+                          textDecoration: "underline",
+                        }}
+                      >
+                        MiniPay:
+                      </Text>
+                    </View>
                     <View style={{ display: "flex" }}>
-                      <Text style={styles.textXs}>{invoice.minipaywallet}</Text>
+                      <Text style={styles.textXs}>{data.wallet}</Text>
                     </View>
                   </View>
                 </View>
@@ -177,7 +195,7 @@ const PreviewInvoicepdfPage = () => {
                   }}
                 >
                   <Text style={styles.textXsBold}>SubTotal</Text>
-                  <Text style={styles.textXsBold}>${invoice.amount}</Text>
+                  <Text style={styles.textXsBold}>${data.subTotal}</Text>
                 </View>
 
                 <View
@@ -191,7 +209,7 @@ const PreviewInvoicepdfPage = () => {
                   }}
                 >
                   <Text style={styles.textXsBold}>Total</Text>
-                  <Text style={styles.textXsBold}>${invoice.amount}</Text>
+                  <Text style={styles.textXsBold}>${data.total}</Text>
                 </View>
 
                 <View
@@ -205,7 +223,7 @@ const PreviewInvoicepdfPage = () => {
                   }}
                 >
                   <Text style={styles.textXsBold}>Balance Due</Text>
-                  <Text style={styles.textXsBold}>${invoice.amount}</Text>
+                  <Text style={styles.textXsBold}>${data.total}</Text>
                 </View>
 
                 <View
@@ -255,7 +273,7 @@ const PreviewInvoicepdfPage = () => {
             <Text style={{ ...styles.textXsBold, textDecoration: "underline" }}>
               Customer note
             </Text>
-            <Text style={styles.textXs}>{invoice.customerNotes}</Text>
+            <Text style={styles.textXs}>{data.customerNotes}</Text>
           </View>
           <View
             style={{
@@ -266,7 +284,7 @@ const PreviewInvoicepdfPage = () => {
             <Text style={{ ...styles.textXsBold, textDecoration: "underline" }}>
               Invoice Terms
             </Text>
-            <Text style={styles.textXs}>{invoice.terms}</Text>
+            <Text style={styles.textXs}>{data.terms}</Text>
           </View>
         </Page>
       </Document>

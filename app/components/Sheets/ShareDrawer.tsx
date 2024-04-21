@@ -21,6 +21,7 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "next-share";
+import Link from "next/link";
 
 export function ShareDrawer({ invoiceID }: { invoiceID: number }) {
   const shareUrl = appUrl + "/invoice/" + invoiceID;
@@ -98,7 +99,10 @@ export function ShareDrawer({ invoiceID }: { invoiceID: number }) {
               </EmailShareButton>
             </div>
 
-            <div className="flex text-xs bg-neutral-50 line-clamp-1 rounded-sm justify-between  items-center h-14 border w-full  flex-row  space-x-2">
+            <Link
+              href={`/invoice/${invoiceID}`}
+              className="flex text-xs bg-neutral-50 line-clamp-1 rounded-sm justify-between  items-center h-14 border w-full  flex-row  space-x-2"
+            >
               <h1 className="ml-4">{shareUrl}</h1>
               <Button
                 variant="ghost"
@@ -106,7 +110,7 @@ export function ShareDrawer({ invoiceID }: { invoiceID: number }) {
               >
                 <Copy size={16} />
               </Button>
-            </div>
+            </Link>
           </div>
           {/* <DrawerFooter>
             <Button>Submit</Button>

@@ -15,16 +15,16 @@ const AuthMiddleware = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (isDisconnected) {
       // Redirect to home only if not already there
-      if (pathname !== "/") {
-        router.push("/");
-        router.refresh();
-      }
+      // if (pathname !== "/") {
+      //   router.push("/");
+      //   router.refresh();
+      // }
     } else if (!isConnected) {
       // Redirect to dashboard only if not already there
-      if (pathname !== "/dashboard") {
-        router.push("/dashboard");
-        router.refresh();
-      }
+      // if (pathname !== "/dashboard") {
+      //   router.push("/dashboard");
+      //   router.refresh();
+      // }
     }
   }, [isConnected, isDisconnected, router]);
 
