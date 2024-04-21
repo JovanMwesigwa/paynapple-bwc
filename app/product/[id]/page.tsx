@@ -15,6 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useParams } from "next/navigation";
 import { Product } from "@prisma/client";
 import { useAccount } from "wagmi";
+import ErrorComponent from "@/app/components/ErrorComponent";
 
 type Inputs = {
   name: string;
@@ -76,9 +77,7 @@ const ProductDetails = () => {
           className="w-full rounded-sm my-1 border outline-none"
           {...register("name", { required: true })}
         />
-        {errors.name && (
-          <span className="text-xs text-red-500">This field is required</span>
-        )}
+        <ErrorComponent error={error?.name} />
       </div>
 
       <div className="w-full flex flex-row justify-between gap-x-4">
@@ -89,9 +88,7 @@ const ProductDetails = () => {
             className="w-full rounded-sm my-1 border outline-none"
             {...register("price", { required: true })}
           />
-          {errors.price && (
-            <span className="text-xs text-red-500">This field is required</span>
-          )}
+          <ErrorComponent error={errors?.price} />
         </div>
 
         <div className="flex flex-col">
@@ -101,9 +98,7 @@ const ProductDetails = () => {
             className="w-full rounded-sm my-1 border outline-none"
             {...register("unit", { required: true })}
           />
-          {errors.unit && (
-            <span className="text-xs text-red-500">This field is required</span>
-          )}
+          <ErrorComponent error={errors?.unit} />
         </div>
       </div>
 
@@ -115,9 +110,7 @@ const ProductDetails = () => {
           disabled
           {...register("category")}
         />
-        {errors.category && (
-          <span className="text-xs text-red-500">This field is required</span>
-        )}
+        <ErrorComponent error={errors?.category} />
       </div>
 
       <div className="w-full flex flex-col justify-between">
@@ -127,9 +120,7 @@ const ProductDetails = () => {
           defaultValue={data.description}
           {...register("notes")}
         />
-        {errors.notes && (
-          <span className="text-xs text-red-500">This field is required</span>
-        )}
+        <ErrorComponent error={errors?.notes} />
       </div>
 
       <SubmitBtn loading={isPending} title="Create Product" />

@@ -1,10 +1,11 @@
 import { Separator } from "@/components/ui/separator";
 import { ClientT } from "@/types";
+import { Client } from "@prisma/client";
 import { GripVertical } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-const ClientCard = ({ client }: { client: ClientT }) => {
+const ClientCard = ({ client }: { client: Client }) => {
   return (
     <>
       <Link

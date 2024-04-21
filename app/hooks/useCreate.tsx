@@ -1,6 +1,6 @@
 "use client";
 
-import { Product } from "@prisma/client";
+import { Client, Product } from "@prisma/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
@@ -8,7 +8,7 @@ const useCreate = (mutationFunction: any) => {
   const queryClient = useQueryClient(); // Access the query client instance
 
   const createMutation = useMutation({
-    mutationFn: async (data: Product) => {
+    mutationFn: async (data: Product | Client) => {
       const result = await mutationFunction(data);
       return result;
     },

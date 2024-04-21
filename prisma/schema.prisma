@@ -29,7 +29,6 @@ model Client {
   name     String
   email    String    @unique
   phone    String
-  address  String
   notes    String?
   invoices Invoice[]
 }
