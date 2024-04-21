@@ -21,7 +21,7 @@ const BottomTabs = ({
     <div className="fixed bottom-0 left-0 right-0 bg-white p-2 flex flex-row border-t shadow-md">
       <Button
         variant="ghost"
-        onClick={() => router.push("/")}
+        onClick={() => router.push("/dashboard")}
         className={`flex-1 flex hover:bg-white hover:text-green-500  items-center justify-center flex-col  ${
           active === "home" ? " text-green-600" : "text-neutral-400"
         } w-full cursor-pointer`}

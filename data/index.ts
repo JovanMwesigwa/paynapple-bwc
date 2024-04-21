@@ -5,6 +5,7 @@ export const invoices: InvoiceT[] = [
     id: "1",
     client: {
       id: "1",
+      wallet: "0x1234567890",
       name: "Google",
       email: "google@gmail.com",
       phone: "256700713434",
@@ -13,6 +14,7 @@ export const invoices: InvoiceT[] = [
     products: [
       {
         id: "1",
+        wallet: "0x1234567890",
         name: "Product 1",
         price: 1000,
         quantity: 1,
@@ -20,11 +22,13 @@ export const invoices: InvoiceT[] = [
       {
         id: "2",
         name: "Product 2",
+        wallet: "0x1234567890",
         price: 2000,
         quantity: 2,
       },
     ],
     terms: "Payment should be made within 30 days",
+    wallet: "0x1234567890",
     customerNotes: "Please make payments on time",
     minipaywallet: "256700713436",
     thankYouNotes: "Thank you for your business",
@@ -37,6 +41,7 @@ export const invoices: InvoiceT[] = [
   {
     id: "2",
     client: {
+      wallet: "0x1234567890",
       id: "2",
       name: "Twitter",
       email: "twitter@gmail.com",
@@ -46,12 +51,14 @@ export const invoices: InvoiceT[] = [
     products: [
       {
         id: "1",
+        wallet: "0x1234567890",
         name: "Service Fee",
         price: 2000,
         quantity: 1,
       },
     ],
     terms: "Payment should be made within 30 days",
+    wallet: "0x1234567890",
     customerNotes: "Please make payments on time",
     minipaywallet: "256700713436",
     thankYouNotes: "Thank you for your business",
@@ -66,6 +73,7 @@ export const invoices: InvoiceT[] = [
     client: {
       id: "3",
       name: "Facebook",
+      wallet: "0x1234567890",
       email: "facebook@gmail.com",
       phone: "256700713436",
       address: "Kampala, Uganda",
@@ -75,9 +83,11 @@ export const invoices: InvoiceT[] = [
         id: "1",
         name: "Consultation",
         price: 3000,
+        wallet: "0x1234567890",
         quantity: 1,
       },
     ],
+    wallet: "0x1234567890",
     terms: "Payment should be made within 30 days",
     customerNotes: "Please make payments on time",
     thankYouNotes: "Thank you for your business",
@@ -92,6 +102,7 @@ export const invoices: InvoiceT[] = [
     id: "4",
     client: {
       id: "4",
+      wallet: "0x1234567890",
       name: "Amazon",
       email: "amazon@gmail.com",
       phone: "256700713437",
@@ -99,12 +110,14 @@ export const invoices: InvoiceT[] = [
     },
     products: [
       {
+        wallet: "0x1234567890",
         id: "1",
         name: "Marketing Services",
         price: 4000,
         quantity: 1,
       },
     ],
+    wallet: "0x1234567890",
     terms: "Payment should be made within 30 days",
     customerNotes: "Please make payments on time",
     thankYouNotes: "Thank you for your business",
@@ -123,6 +136,7 @@ export const emptyInvoice: InvoiceT = {
   client: {},
   products: [],
   terms: "",
+  wallet: "0x1234567890",
   customerNotes: "",
   minipaywallet: "256700713436",
   thankYouNotes: "Thank you for your business",
@@ -137,11 +151,14 @@ export const Products: ProductT[] = [
   {
     id: "1",
     name: "Product 1",
+
+    wallet: "0x1234567890",
     price: 1000,
     quantity: 1,
   },
   {
     id: "2",
+    wallet: "0x1234567890",
     name: "Product 2",
     price: 2000,
     quantity: 2,
@@ -150,10 +167,12 @@ export const Products: ProductT[] = [
     id: "3",
     name: "Service Fee",
     price: 2000,
+    wallet: "0x1234567890",
     quantity: 1,
   },
   {
     id: "4",
+    wallet: "0x1234567890",
     name: "Consultation",
     price: 3000,
     quantity: 1,
@@ -162,6 +181,7 @@ export const Products: ProductT[] = [
     id: "5",
     name: "Marketing Services",
     price: 4000,
+    wallet: "0x1234567890",
     quantity: 1,
   },
 ];
@@ -170,6 +190,7 @@ export const clients: ClientT[] = [
   {
     id: "1",
     name: "Google",
+    wallet: "0x1234567890",
     email: "google@gmail.com",
     phone: "256700713434",
     address: "Kampala, Uganda",
@@ -178,6 +199,7 @@ export const clients: ClientT[] = [
     id: "2",
     name: "Twitter",
     email: "twitter@gmail.com",
+    wallet: "0x1234567890",
     phone: "256700713435",
     address: "Kampala, Uganda",
   },
@@ -186,6 +208,7 @@ export const clients: ClientT[] = [
     name: "Facebook",
     email: "facebook@gmail.com",
     phone: "256700713436",
+    wallet: "0x1234567890",
     address: "Kampala, Uganda",
   },
   {
@@ -194,6 +217,7 @@ export const clients: ClientT[] = [
     email: "amazon@gmail.com",
     phone: "256700713437",
     address: "Kampala, Uganda",
+    wallet: "0x1234567890",
   },
 ];
 
@@ -202,6 +226,7 @@ export const payLinks: PayLinkT[] = [
     id: "1",
     title: "UpWork link",
     asset: "cUSD",
+    wallet: "0x1234567890",
     amount: 5000,
     status: "Pending",
     fixed: false,
@@ -214,6 +239,7 @@ export const payLinks: PayLinkT[] = [
     id: "2",
     title: "Twitter link",
     asset: "USDC",
+    wallet: "0x1234567890",
     amount: 2000,
     status: "Pending",
     fixed: false,
@@ -226,6 +252,7 @@ export const payLinks: PayLinkT[] = [
     id: "3",
     title: "Facebook link",
     asset: "USDT",
+    wallet: "0x1234567890",
     amount: 3000,
     status: "Pending",
     fixed: false,
@@ -241,6 +268,7 @@ export const payLinks: PayLinkT[] = [
     amount: 4000,
     status: "Pending",
     fixed: false,
+    wallet: "0x1234567890",
     invoice: invoices[3],
     url: "http://localhost:3000/pay/4",
     createdAt: "2021-11-12",

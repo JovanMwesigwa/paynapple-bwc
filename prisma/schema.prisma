@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Invoice {
+  id            String      @id @default(uuid())
+  wallet        String
+  client        Client      @relation(fields: [clientId], references: [id])
+  clientId      String
+  products      Product[]
+  invoiceNumber String
+  category      InvoiceEnum
+  terms         String?
+  customerNotes String?
+  thankYouNotes String?
+  dueDate       DateTime
+  minipaywallet String
+  createdAt     DateTime    @default(now())
+  PayLink       PayLink[]
+}
+
+model Client {
+  id       String    @id @default(uuid())
+  wallet   String
+  name     String
+  email    String    @unique
+  phone    String
+  address  String
+  notes    String?
+  invoices Invoice[]
+}
+
+model Product {
+  id          String  @id @default(uuid())
+  wallet      String
+  name        String
+  price       Float
+  quantity    Int
+  description String?
+  invoiceId   String
+  invoice     Invoice @relation(fields: [invoiceId], references: [id])
+}
+
+model PayLink {
+  id          String     @id @default(uuid())
+  wallet      String
+  title       String
+  asset       AssetsEnum
+  amount      Float
+  status      String
+  fixed       Boolean
+  description String?
+  url         String
+  invoice     Invoice?   @relation(fields: [invoiceId], references: [id])
+  invoiceId   String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+enum InvoiceEnum {
+  Unpaid
+  Partially
+  Paid
+  Rejected
+}
+
+enum AssetsEnum {
+  cUSD
+  USDC
+  USDT
+}

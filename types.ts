@@ -9,6 +9,7 @@ export enum InvoiceType {}
 
 export type InvoiceT = {
   id: string;
+  wallet: string;
   client: ClientT;
   amount: number;
   products: ProductT[];
@@ -24,6 +25,7 @@ export type InvoiceT = {
 
 export type ClientT = {
   id: string;
+  wallet: string;
   name: string;
   email: string;
   phone: string;
@@ -33,6 +35,7 @@ export type ClientT = {
 
 export type ProductT = {
   id: string;
+  wallet: string;
   name: string;
   price: number;
   quantity: number;
@@ -41,6 +44,7 @@ export type ProductT = {
 
 export type PayLinkT = {
   id: string;
+  wallet: string;
   title: string;
   asset: AssetsEnum;
   amount: number;
