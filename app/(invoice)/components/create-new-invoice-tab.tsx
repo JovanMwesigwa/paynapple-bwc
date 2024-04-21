@@ -49,7 +49,7 @@ export function CreateNewInvoiceTabs() {
               <Share2 size={20} />
             </Button>
 
-            <DownloadInvoice />
+            {/* <DownloadInvoice invoice={} /> */}
           </div>
         </div>
       </TabsContent>

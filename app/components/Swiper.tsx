@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React from "react";
@@ -11,7 +12,7 @@ interface StoryProps {
 // Define a constant with some dummy story data
 const dummyStories: StoryProps[] = [
   { image: "https://via.placeholder.com/150", title: "Story 1" },
-  { image: "https://via.placeholder.com/150", title: "Story 2" },https://via.placeholder.com/150
+  { image: "https://via.placeholder.com/150", title: "Story 2" },
   { image: "https://via.placeholder.com/150", title: "Story 3" },
   { image: "https://via.placeholder.com/150", title: "Story 4" },
 ];
