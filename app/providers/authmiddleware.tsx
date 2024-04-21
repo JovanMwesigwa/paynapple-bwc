@@ -17,18 +17,20 @@ const AuthMiddleware = ({ children }: { children: ReactNode }) => {
       // Redirect to home only if not already there
       if (pathname !== "/") {
         router.push("/");
+        router.refresh();
       }
     } else if (!isConnected) {
       // Redirect to dashboard only if not already there
       if (pathname !== "/dashboard") {
         router.push("/dashboard");
+        router.refresh();
       }
     }
   }, [isConnected, isDisconnected, router]);
 
   if (isReconnecting || isConnecting) {
     return (
-      <div className="flex flex-1 items-center justify-center">
+      <div className="flex flex-1 items-center justify-center h-full">
         <Loader />
       </div>
     );

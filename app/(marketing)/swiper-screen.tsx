@@ -1,10 +1,13 @@
 "use client";
 
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader, Wallet } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useAccount } from "wagmi";
+import { useAccount, useConnect } from "wagmi";
 import PaynappleLogo from "../components/PaynappleLogo";
+import { Button } from "@/components/ui/button";
+import { injected } from "wagmi/connectors";
+// import { InjectedConnector } from "wagmi/connectors/injected";
 
 const SwiperScreen = ({
   btn,
@@ -17,13 +20,7 @@ const SwiperScreen = ({
 }) => {
   const { isConnected } = useAccount();
 
-  const router = useRouter();
-
-  // Navigate to the dashboard if the user is already connected
-
-  if (isConnected) {
-    router.push("/dashboard");
-  }
+  const { connect } = useConnect();
 
   return (
     <div className="flex flex-col  justify-center text-white  h-full py-5">
@@ -55,8 +52,14 @@ const SwiperScreen = ({
               </>
             ) : (
               <>
-                Connect your wallet 👉
-                <ConnectButton />
+                <Button
+                  onClick={() => connect({ connector: injected() })}
+                  className="w-full bg-red-500  flex flex-row gap-x-2 rounded-md  items-center justify-center p-3"
+                  variant="ghost"
+                >
+                  Connect Wallet
+                  <Wallet size={18} />
+                </Button>
               </>
             )}
           </div>
