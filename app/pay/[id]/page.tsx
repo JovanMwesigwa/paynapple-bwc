@@ -44,7 +44,9 @@ const PaylinkPage = () => {
       // paid gas in cUSD
       await kit.setFeeCurrency(CeloContract.StableToken);
 
-      const parsedAmount = await ethers.utils.parseEther("0.001");
+      const parsedAmount = await ethers.utils.parseEther(
+        data.amount.toString()
+      );
 
       const amount_ = parsedAmount.toString();
 
