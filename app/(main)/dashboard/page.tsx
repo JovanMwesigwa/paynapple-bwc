@@ -1,7 +1,7 @@
-import BottomTabs from "../../components/bottom-tabs";
-import ParentFloatingButton from "../components/ParentFloatingButton";
-import SelectButtons from "../components/SelectButtons";
-import SwipeCard from "../components/SwipeCard";
+import BottomTabs from "../../../components/bottom-tabs";
+import ParentFloatingButton from "../../components/ParentFloatingButton";
+import SelectButtons from "../../components/SelectButtons";
+import SwipeCard from "../../components/SwipeCard";
 import Invoices from "./Invoices";
 import Header from "./header";
 

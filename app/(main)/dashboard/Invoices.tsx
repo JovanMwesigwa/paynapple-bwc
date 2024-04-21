@@ -1,5 +1,5 @@
 import React from "react";
-import InvoiceCard from "../components/InvoiceCard";
+import InvoiceCard from "../../components/InvoiceCard";
 import { invoices } from "@/data";
 
 const Invoices = () => {
