@@ -1,12 +1,13 @@
 "use client";
 
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { ArrowRight, Loader, Wallet } from "lucide-react";
+import { ArrowRight, Home, Loader, Wallet } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useAccount, useConnect } from "wagmi";
 import PaynappleLogo from "../components/PaynappleLogo";
 import { Button } from "@/components/ui/button";
 import { injected } from "wagmi/connectors";
+import Link from "next/link";
 // import { InjectedConnector } from "wagmi/connectors/injected";
 
 const SwiperScreen = ({
@@ -37,18 +38,17 @@ const SwiperScreen = ({
 
       <div className="flex flex-row w-full items-center justify-center mt-3 px-4">
         {btn ? (
-          // <Link
-          //   href="/dashboard"
-          //   className="w-full bg-red-500 flex flex-row gap-x-2 rounded-md  items-center justify-center p-2"
-          // >
-          //   Connect Wallet
-          //   <Wallet size={18} />
-          // </Link>
-          <div className="w-full flex flex-row gap-x-2 items-center justify-evenly italic">
+          <div className="w-full flex flex-row gap-x-2 items-center justify-evenly ">
             {isConnected ? (
               <>
-                Sign In 👉
-                <ConnectButton />
+                <h1 className="italic">Go Home 👉</h1>
+                <Link
+                  href="/dashboard"
+                  className="w-1/2  text-white border border-white flex flex-row gap-x-2 rounded-md  items-center justify-center p-2"
+                >
+                  Home
+                  <Home size={18} />
+                </Link>
               </>
             ) : (
               <>
