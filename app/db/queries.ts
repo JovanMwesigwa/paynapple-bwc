@@ -43,3 +43,33 @@ export const getClientById = async (id: string) => {
 
   return client;
 };
+
+export const getAllInvoices = async (wallet: string) => {
+  return await prisma.invoice.findMany({
+    where: {
+      wallet,
+    },
+  });
+};
+
+export const getAllPayLinks = async (wallet: string) => {
+  return await prisma.payLink.findMany({
+    where: {
+      wallet,
+    },
+  });
+};
+
+export const getPayLinkById = async (id: number) => {
+  const payLink = await prisma.payLink.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+  if (!payLink) {
+    throw new Error("PayLink not found");
+  }
+
+  return payLink;
+};

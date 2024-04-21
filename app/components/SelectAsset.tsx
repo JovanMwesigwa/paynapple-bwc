@@ -12,9 +12,15 @@ import {
 import Image from "next/image";
 import { AssetsEnum } from "@/types";
 
-export function SelectAsset({ asset }: { asset?: AssetsEnum | undefined }) {
+export function SelectAsset({
+  asset,
+  setSelectedAsset,
+}: {
+  asset?: AssetsEnum | undefined;
+  setSelectedAsset?: (asset: AssetsEnum) => void;
+}) {
   return (
-    <Select>
+    <Select onValueChange={setSelectedAsset} value={asset}>
       <SelectTrigger className="w-full my-2 outline-none">
         <SelectValue placeholder="Select an asset" defaultValue={asset} />
       </SelectTrigger>

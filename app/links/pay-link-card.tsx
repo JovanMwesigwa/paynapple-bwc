@@ -6,12 +6,12 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { Separator } from "@/components/ui/separator";
-import { PayLinkT } from "@/types";
+import { PayLink } from "@prisma/client";
 import { ChevronsUpDown, Pen } from "lucide-react";
 import Link from "next/link";
 import { ShareLinkDrawer } from "../components/Sheets/ShareLinkDrawer";
 
-const PayLinkCard = ({ item }: { item: PayLinkT }) => {
+const PayLinkCard = ({ item }: { item: PayLink }) => {
   return (
     <>
       <Collapsible>
@@ -36,7 +36,7 @@ const PayLinkCard = ({ item }: { item: PayLinkT }) => {
         </CollapsibleTrigger>
         <CollapsibleContent>
           <div className="flex pt-4 flex-col gap-y-2 justify-center">
-            <Link href={`/link/${1}`}>
+            <Link href={`/link/${item.id}`}>
               <div className="flex flex-row items-center gap-x-2">
                 <div className="size-5 bg-blue-500 flex items-center justify-center rounded-full">
                   <Pen className="size-2 text-white " />

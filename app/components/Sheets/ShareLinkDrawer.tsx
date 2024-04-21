@@ -22,9 +22,10 @@ import {
   WhatsappShareButton,
 } from "next-share";
 import { PayLinkT } from "@/types";
+import { PayLink } from "@prisma/client";
 
-export function ShareLinkDrawer({ link }: { link: PayLinkT }) {
-  const shareUrl = link.url;
+export function ShareLinkDrawer({ link }: { link: PayLink }) {
+  const shareUrl = appUrl + "/pay/" + link.id;
 
   return (
     <Drawer>

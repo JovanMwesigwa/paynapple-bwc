@@ -24,3 +24,11 @@ export const createClient = async (data: Client) => {
 export const updateClient = async (id: number, data: Client) => {
   return await prisma.client.update({ where: { id }, data });
 };
+
+export const createNewPayLink = async (data: any) => {
+  return await prisma.payLink.create({ data });
+};
+
+export const updatePayLink = async (id: number, data: any) => {
+  return await prisma.payLink.update({ where: { id }, data });
+};
