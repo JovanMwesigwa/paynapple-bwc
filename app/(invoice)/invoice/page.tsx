@@ -1,6 +1,6 @@
 import React from "react";
-import { TabsComponent } from "./[id]/tabs-component";
 import { emptyInvoice } from "@/data";
+import { TabsComponent } from "./edit/[id]/tabs-component";
 
 const NewInvoice = () => {
   return (
