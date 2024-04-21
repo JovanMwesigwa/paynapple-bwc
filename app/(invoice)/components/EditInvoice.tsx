@@ -1,8 +1,10 @@
 import ClientCard from "@/app/components/ClientCard";
 import ProductCard from "@/app/components/ProductCard";
+import ClientsDrawer from "@/app/components/Sheets/ClientsDrawer";
 import FloatingButton from "@/components/FloatingButton";
 import { Separator } from "@/components/ui/separator";
-import { InvoiceT } from "@/types";
+import { ClientT, InvoiceT } from "@/types";
+import { Client } from "@prisma/client";
 import {
   AudioWaveform,
   CreditCard,
@@ -15,8 +17,17 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
-const EditInvoice = ({ invoice }: { invoice: InvoiceT }) => {
+const EditInvoice = ({
+  invoice,
+  client,
+  setClient,
+}: {
+  invoice: InvoiceT;
+  client: Client | ClientT | null;
+  setClient: any;
+}) => {
   return (
     <div className="flex flex-1 flex-col gap-y-4">
       {/* Header */}
@@ -40,20 +51,12 @@ const EditInvoice = ({ invoice }: { invoice: InvoiceT }) => {
       <div className="flex  flex-row w-full mb-3">
         <div className="flex flex-1 flex-col gap-y-1 ">
           <ClientCard
-            client={invoice.client}
+            client={client ? client : invoice.client}
             invoiceNumber={invoice.invoiceNumber}
           />
 
           <div className="w-full h-14 mt-4 border border-dashed rounded-sm flex items-center justify-center border-neutral-400">
-            <Link href="/client/new">
-              <div className="flex cursor-pointer flex-row items-center justify-center gap-x-2">
-                <PlusIcon size={20} className="text-green-500" />
-                <h1 className="font-light text-sm">
-                  {" "}
-                  {invoice.client ? "EDIT" : "ADD"} CLIENT
-                </h1>
-              </div>
-            </Link>
+            <ClientsDrawer setClient={setClient} client={client} />
           </div>
         </div>
       </div>
@@ -67,7 +70,7 @@ const EditInvoice = ({ invoice }: { invoice: InvoiceT }) => {
         ))}
 
         <div className="w-full h-14 border border-dashed rounded-sm flex items-center justify-center border-neutral-400">
-          <Link href="/product/new">
+          <Link href="/products/?pick">
             <div className="flex cursor-pointer flex-row items-center justify-center gap-x-2">
               <PlusIcon size={20} className="text-green-500" />
               <h1 className="font-light text-sm">ADD ITEM</h1>

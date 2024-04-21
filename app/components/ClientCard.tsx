@@ -1,11 +1,12 @@
 import { ClientT } from "@/types";
+import { Client } from "@prisma/client";
 import React from "react";
 
 const ClientCard = ({
   client,
   invoiceNumber,
 }: {
-  client: ClientT;
+  client: Client | ClientT;
   invoiceNumber?: number | string;
 }) => {
   return (

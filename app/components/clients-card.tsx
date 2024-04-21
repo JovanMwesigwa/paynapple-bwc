@@ -1,15 +1,31 @@
 import { Separator } from "@/components/ui/separator";
-import { ClientT } from "@/types";
 import { Client } from "@prisma/client";
 import { GripVertical } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
 
-const ClientCard = ({ client }: { client: Client }) => {
+const ClientCard = ({
+  client,
+  setClient,
+}: {
+  client: Client;
+  setClient?: any;
+}) => {
+  const router = useRouter();
+
+  const handleClientClick = () => {
+    if (setClient) {
+      setClient(client);
+      return;
+    }
+
+    router.push(`/client/${client.id}`);
+  };
+
   return (
     <>
-      <Link
-        href={`/client/${client.id}`}
+      <div
+        onClick={handleClientClick}
         className="w-full flex flex-row my-4 cursor-pointer justify-between gap-x-6"
       >
         <div className="size-12 flex items-center justify-center rounded-full bg-neutral-100 text-green-500 font-medium text-2xl">
@@ -23,7 +39,7 @@ const ClientCard = ({ client }: { client: Client }) => {
         <div className="">
           <GripVertical size={20} className="text-neutral-500 cursor-pointer" />
         </div>
-      </Link>
+      </div>
 
       <Separator />
     </>

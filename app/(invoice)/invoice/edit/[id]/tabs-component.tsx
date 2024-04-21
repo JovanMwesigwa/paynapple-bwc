@@ -8,8 +8,12 @@ import { useRouter } from "next/navigation";
 import DownloadInvoice from "../../../components/DownloadInvoice";
 import EditInvoice from "../../../components/EditInvoice";
 import PreviewInvoicepdf from "../../../components/PreviewInvoicepdf";
+import { useState } from "react";
+import { Client } from "@prisma/client";
 
 export function TabsComponent({ invoice }: { invoice: InvoiceT }) {
+  const [client, setClient] = useState<Client | null>(null);
+
   const router = useRouter();
 
   return (
@@ -35,7 +39,7 @@ export function TabsComponent({ invoice }: { invoice: InvoiceT }) {
 
       {/* Edit */}
       <TabsContent value="edit" className="p-4">
-        <EditInvoice invoice={invoice} />
+        <EditInvoice invoice={invoice} client={client} setClient={setClient} />
       </TabsContent>
 
       {/* Preview */}
