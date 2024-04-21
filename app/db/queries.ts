@@ -77,3 +77,21 @@ export const getPayLinkById = async (id: number) => {
 
   return payLink;
 };
+
+export const getInvoiceById = async (id: string) => {
+  const invoice = await prisma.invoice.findUnique({
+    where: {
+      id: Number(id),
+    },
+    include: {
+      products: true,
+      client: true,
+    },
+  });
+
+  if (!invoice) {
+    throw new Error("Invoice not found");
+  }
+
+  return invoice;
+};

@@ -22,7 +22,7 @@ import {
   WhatsappShareButton,
 } from "next-share";
 
-export function ShareDrawer({ invoiceID }: { invoiceID: string }) {
+export function ShareDrawer({ invoiceID }: { invoiceID: number }) {
   const shareUrl = appUrl + "/invoice/" + invoiceID;
 
   return (

@@ -5,8 +5,9 @@ import { Download } from "lucide-react";
 import PreviewInvoicepdf from "./PreviewInvoicepdf";
 import { ReactNode } from "react";
 import { InvoiceT } from "@/types";
+import { Invoice } from "@prisma/client";
 
-const DownloadInvoice = ({ invoice }: { invoice: InvoiceT }) => {
+const DownloadInvoice = ({ invoice }: { invoice: Invoice }) => {
   return (
     <PDFDownloadLink
       document={<PreviewInvoicepdf invoice={invoice} />}

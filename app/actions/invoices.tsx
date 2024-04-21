@@ -3,7 +3,7 @@
 import { InvoiceSchema } from "@/validation";
 import { createInvoice } from "../db/mutations";
 import { redirect } from "next/navigation";
-import { getAllInvoices } from "../db/queries";
+import { getAllInvoices, getInvoiceById } from "../db/queries";
 
 export const upsertCreateNewInvoice = async (data: any) => {
   const validation = await InvoiceSchema.safeParse(data);
@@ -23,6 +23,12 @@ export const upsertCreateNewInvoice = async (data: any) => {
 
 export const upsertGetAllInvoices = async (wallet: string) => {
   const result = await getAllInvoices(wallet);
+
+  return result;
+};
+
+export const upsertGetInvoiceById = async (id: string) => {
+  const result = await getInvoiceById(id);
 
   return result;
 };

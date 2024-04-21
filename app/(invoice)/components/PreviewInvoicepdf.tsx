@@ -1,12 +1,16 @@
 "use client";
 
 import { InvoiceT } from "@/types";
+import { Invoice, Product } from "@prisma/client";
 import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 import { AudioWaveform } from "lucide-react";
 
 // Create Document Component
-const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
+const PreviewInvoicepdf = ({ invoice }: { invoice: Invoice }) => {
   if (!invoice) return null;
+
+  // @ts-ignore
+  const invoiceProducts = invoice.products.length > 0 ? invoice.products : [];
 
   return (
     <>
@@ -40,9 +44,12 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
               <Text
                 style={{ ...styles.textXsBold, textDecoration: "underline" }}
               >
+                {/* @ts-ignore */}
                 Bill to: {invoice.client.name}
               </Text>
+              {/* @ts-ignore */}
               <Text style={styles.textXs}>{invoice.client.email}</Text>
+              {/* @ts-ignore */}
               <Text style={styles.textXs}>{invoice.client.phone}</Text>
             </View>
           </View>
@@ -67,7 +74,7 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
               </View>
             </View>
 
-            {invoice.products.map((product, index) => (
+            {invoiceProducts.map((product: Product, index: any) => (
               <View style={styles.tableItem} key={product.id}>
                 <View style={styles.tableItemContainerStart}>
                   <Text>{index + 1}</Text>
@@ -125,7 +132,7 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
                       MiniPay:
                     </Text>
                     <View style={{ display: "flex" }}>
-                      <Text style={styles.textXs}>{invoice.minipaywallet}</Text>
+                      <Text style={styles.textXs}>{invoice.wallet}</Text>
                     </View>
                   </View>
                 </View>
@@ -172,7 +179,7 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
                   }}
                 >
                   <Text style={styles.textXsBold}>SubTotal</Text>
-                  <Text style={styles.textXsBold}>${invoice.amount}</Text>
+                  <Text style={styles.textXsBold}>${invoice.subTotal}</Text>
                 </View>
 
                 <View
@@ -186,7 +193,7 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
                   }}
                 >
                   <Text style={styles.textXsBold}>Total</Text>
-                  <Text style={styles.textXsBold}>${invoice.amount}</Text>
+                  <Text style={styles.textXsBold}>${invoice.total}</Text>
                 </View>
 
                 <View
@@ -200,7 +207,7 @@ const PreviewInvoicepdf = ({ invoice }: { invoice: InvoiceT }) => {
                   }}
                 >
                   <Text style={styles.textXsBold}>Balance Due</Text>
-                  <Text style={styles.textXsBold}>${invoice.amount}</Text>
+                  <Text style={styles.textXsBold}>${invoice.total}</Text>
                 </View>
 
                 <View
